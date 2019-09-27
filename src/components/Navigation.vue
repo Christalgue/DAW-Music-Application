@@ -1,7 +1,8 @@
 <template>
-  <nav>
-    <ul>
+  <nav class="menu">
+    <ul class="menu-list">
       <li>
+        <label for="search"></label>
         <input id="search" name="q" type="text" placeholder="Mots clés" />
       </li>
       <li>
@@ -19,27 +20,29 @@
       <li>
         <!--TODO : A completer-->
         <router-link to="/settings">
-<!--          <i class="fas fa-cog"></i>-->
-          Setting
+          <img src="../images/user-cog-solid.svg" alt="user settings" />
         </router-link>
       </li>
       <li>
         <!--TODO : A completer-->
-        <router-link to="/">Log out</router-link>
+        <router-link to="/">
+          <img src="../images/sign-out-alt-solid.svg" alt="log out" />
+        </router-link>
       </li>
     </ul>
   </nav>
 </template>
 
 <style>
-nav, ul{
+.menu, .menu-list{
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
+  align-items: center;
   width: 100%;
 }
 
-ul {
+.menu-list {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -49,15 +52,20 @@ ul {
   border-radius: 2px;
 }
 
-li {
+.menu-list > li {
   display: block;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
 }
 
-li > a {
+.menu-list > li > a {
   color: black;
   text-decoration: none;
+}
+
+.menu-list > li > a > img {
+  height: 22px;
+  width: 22px;
 }
 </style>
