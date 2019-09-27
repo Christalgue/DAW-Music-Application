@@ -13,7 +13,7 @@
       <div>
         <ul>
           <li>
-            Bad
+            <router-link to="/album">Bad</router-link>
           </li>
           <li>
             Thriller

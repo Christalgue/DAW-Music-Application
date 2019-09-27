@@ -1,7 +1,20 @@
 <template>
   <div>
-    <h1>Home</h1>
-    <div>GLO-3102 Home</div>
+    <h1>Welcome Michelle</h1>
+    <div>
+      <p>Your artists : </p>
+      <ul>
+        <li>
+          <router-link to="/artist">Michael Jackson</router-link>
+        </li>
+      </ul>
+      <p>Your albums : </p>
+      <ul>
+        <li>
+          <router-link to="/album">Bad</router-link>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
