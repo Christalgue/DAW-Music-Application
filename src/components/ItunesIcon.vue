@@ -14,5 +14,6 @@ export default {
 #itunes-icon > img {
   height: 40px;
   width: 40px;
+  margin-left: 0.5rem;
 }
 </style>

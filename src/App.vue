@@ -15,4 +15,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+* {
+  font-family: Verdana, sans-serif;
+}
+</style>
