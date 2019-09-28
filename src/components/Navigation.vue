@@ -6,7 +6,10 @@
         <input id="search" name="q" type="text" placeholder="Mots clés" />
       </li>
       <li>
-        <router-link to="/">Home</router-link>
+        <router-link class="hyperlink-decoration" to="/">Home</router-link>
+      </li>
+      <li>
+        <router-link class="hyperlink-decoration" to="/">Playlists</router-link>
       </li>
       <li>
         Michelle
@@ -28,13 +31,15 @@
 </template>
 
 <style>
-.menu, .menu-list{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  width: 100%;
-}
+
+/*.menu,*/
+/*.menu-list{*/
+/*  display: flex;*/
+/*  flex-direction: row;*/
+/*  justify-content: space-around;*/
+/*  align-items: center;*/
+/*  width: 100%;*/
+/*}*/
 
 .menu-list {
   list-style-type: none;
@@ -44,13 +49,14 @@
   background-color: whitesmoke;
   border: black;
   border-radius: 2px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 }
 
 .menu-list > li {
   display: block;
   text-align: center;
   padding: 14px 16px;
-  text-decoration: none;
 }
 
 .menu-list > li > a {
@@ -61,5 +67,9 @@
 .menu-list > li > a > img {
   height: 22px;
   width: 22px;
+}
+
+#search{
+  width: 150px;
 }
 </style>
