@@ -1,17 +1,21 @@
 <template>
   <div>
-    <h1>Welcome Michelle</h1>
-    <div>
-      <p>Your artists : </p>
+    <div class="main-title bordered">
+      <h1>Welcome Michelle</h1>
+    </div>
+    <div class="title bordered">
+      <h2>Your artists : </h2>
       <ul>
         <li>
-          <router-link to="/artist">Michael Jackson</router-link>
+          <router-link class="hyperlink-decoration" to="/artist">Michael Jackson</router-link>
         </li>
       </ul>
-      <p>Your albums : </p>
+    </div>
+    <div class="title bordered">
+      <h2>Your albums : </h2>
       <ul>
         <li>
-          <router-link to="/album">Bad</router-link>
+          <router-link class="hyperlink-decoration" to="/album">Bad</router-link>
         </li>
       </ul>
     </div>

@@ -1,47 +1,49 @@
 <template>
   <div>
-    <h1>Bad</h1>
-    <router-link to="/artist">
-      <h2>Michael Jackson</h2>
-    </router-link>
-    <itunes-icon href="https://music.apple.com/fr/album/bad/559334659" />
-    <div>
-      <ul class="info-album-list">
+    <div class="main-title bordered">
+      <h1>Bad</h1>
+      <itunes-icon href="https://music.apple.com/fr/album/bad/559334659" />
+    </div>
+    <div class="title bordered">
+      <router-link class="hyperlink-decoration" to="/artist">
+        <h2>Michael Jackson</h2>
+      </router-link>
+    </div>
+    <div class="album-description bordered">
+      <div class="info-album">
+        <img class="album-cover" src="https://upload.wikimedia.org/wikipedia/en/5/51/Michael_Jackson_-_Bad.png" alt="Bad album cover">
+        <ul class="info-album-list">
+          <li>
+            Pop
+          </li>
+          <li>
+            Released on August the 31st of 1987
+          </li>
+          <li>
+            11 tracks
+          </li>
+        </ul>
+      </div>
+      <ol class="songs-list">
         <li>
-          <img src="https://upload.wikimedia.org/wikipedia/en/5/51/Michael_Jackson_-_Bad.png" alt="Bad album cover">
+          <p class="song-number">1</p>
+          <p class="song-title">Bad</p>
+          <p class="song-duration">4:07</p>
+          <play-button/>
         </li>
         <li>
-          Released on August the 31st of 1987
+          <p class="song-number">2</p>
+          <p class="song-title">The Way You Make Me Feel</p>
+          <p class="song-duration">4:58</p>
+          <play-button/>
         </li>
         <li>
-          11 tracks
+          <p class="song-number">3</p>
+          <p class="song-title">Speed Demon</p>
+          <p class="song-duration">4:02</p>
+          <play-button/>
         </li>
-        <li>
-          Pop
-        </li>
-        <li>
-          <ol class="songs-list">
-            <li>
-              <p class="song-title">Bad</p>
-              <p class="song-duration">4:07</p>
-              <play-button/>
-            </li>
-            <li>
-              <p class="song-title">The Way You Make Me Feel</p>
-              <p class="song-duration">4:58</p>
-              <play-button/>
-            </li>
-            <li>
-              <p class="song-title">Speed Demon</p>
-              <p class="song-duration">4:02</p>
-              <play-button/>
-            </li>
-            <li>
-              ...
-            </li>
-          </ol>
-        </li>
-      </ul>
+      </ol>
     </div>
   </div>
 </template>
@@ -62,13 +64,23 @@ export default {
 </script>
 
 <style>
-.songs-list > li {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+.info-album {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 1rem;
+  padding: 0;
 }
 
-.info-album-list > li {
-  list-style-type: none;
+.info-album-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.songs-list > li {
+  display: grid;
+  grid-template-columns: 1fr 6fr 1fr 1fr;
+  grid-gap: 1rem;
+  padding: 0;
 }
 </style>

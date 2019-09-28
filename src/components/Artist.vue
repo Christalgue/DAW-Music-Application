@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div class="artist-name bordered">
+    <div class="main-title bordered">
       <h1>Michael Jackson</h1>
       <itunes-icon
         href="https://music.apple.com/fr/artist/michael-jackson/32940"
       />
     </div>
-    <div class="artist-genre bordered">
+    <div class="title bordered">
       <h2>Pop</h2>
     </div>
     <div class="albums bordered">
@@ -14,7 +14,7 @@
       <div>
         <ul class="album-list">
           <li>
-            <router-link to="/album">
+            <router-link class="hyperlink-decoration" to="/album">
               <img
                 class="album-cover"
                 src="https://upload.wikimedia.org/wikipedia/en/5/51/Michael_Jackson_-_Bad.png"
@@ -26,7 +26,7 @@
             </router-link>
           </li>
           <li>
-            <router-link to="/artist">
+            <router-link class="hyperlink-decoration" to="/artist">
               <img
                 class="album-cover"
                 src="https://upload.wikimedia.org/wikipedia/en/thumb/5/55/Michael_Jackson_-_Thriller.png/220px-Michael_Jackson_-_Thriller.png"
@@ -38,7 +38,7 @@
             </router-link>
           </li>
           <li>
-            <router-link to="/artist">
+            <router-link class="hyperlink-decoration" to="/artist">
               <img
                 class="album-cover"
                 src="https://upload.wikimedia.org/wikipedia/en/f/f6/Off_the_wall.jpg"
@@ -73,13 +73,20 @@ export default {
   border-radius: 0.5rem;
 }
 
-.artist-name,
-.artist-genre {
+.main-title,
+.title {
   text-align: center;
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
+}
+
+.main-title {
+  flex-direction: row;
+}
+
+.title {
+  flex-direction: column;
 }
 
 .albums {
@@ -103,9 +110,7 @@ export default {
   display: flex;
   flex-direction: column;
   font-size: 20px;
-  color: black;
   text-align: center;
-  text-decoration: none;
 }
 
 .album-title {
@@ -120,5 +125,10 @@ export default {
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
   position: relative;
+}
+
+.hyperlink-decoration {
+  text-decoration: none;
+  color: black;
 }
 </style>

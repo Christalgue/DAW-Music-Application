@@ -11,6 +11,11 @@ export default {
 </script>
 
 <style>
+#play-button {
+  display: flex;
+  align-items: center;
+}
+
 #play-button > img {
   width: 20px;
   height: 20px;
