@@ -5,23 +5,23 @@
         <label for="search"></label>
         <input id="search" name="q" type="text" placeholder="Mots clés" />
       </li>
-      <li>
+      <li class="nav-hovered">
         <router-link class="hyperlink-decoration" to="/">Home</router-link>
       </li>
-      <li>
-        <router-link class="hyperlink-decoration" to="/">Playlists</router-link>
+      <li class="nav-hovered">
+        <router-link class="hyperlink-decoration" to="/playlists">
+          Playlists
+        </router-link>
       </li>
       <li>
         Michelle
       </li>
-      <li>
-        <!--TODO : A implémenter pour les prochains rendus-->
+      <li class="nav-hovered">
         <router-link to="/settings">
           <img src="../images/user-cog-solid.svg" alt="user settings" />
         </router-link>
       </li>
-      <li>
-        <!--TODO : A implémenter pour les prochains rendus-->
+      <li class="nav-hovered">
         <router-link to="/">
           <img src="../images/sign-out-alt-solid.svg" alt="log out" />
         </router-link>
@@ -49,7 +49,7 @@
   padding: 14px 16px;
 }
 
-.menu-list > li:hover {
+.nav-hovered:hover {
   background-color: lightgrey;
 }
 
