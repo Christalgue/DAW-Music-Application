@@ -15,13 +15,13 @@
         Michelle
       </li>
       <li>
-        <!--TODO : A completer-->
+        <!--TODO : A implémenter pour les prochains rendus-->
         <router-link to="/settings">
           <img src="../images/user-cog-solid.svg" alt="user settings" />
         </router-link>
       </li>
       <li>
-        <!--TODO : A completer-->
+        <!--TODO : A implémenter pour les prochains rendus-->
         <router-link to="/">
           <img src="../images/sign-out-alt-solid.svg" alt="log out" />
         </router-link>
@@ -31,16 +31,6 @@
 </template>
 
 <style>
-
-/*.menu,*/
-/*.menu-list{*/
-/*  display: flex;*/
-/*  flex-direction: row;*/
-/*  justify-content: space-around;*/
-/*  align-items: center;*/
-/*  width: 100%;*/
-/*}*/
-
 .menu-list {
   list-style-type: none;
   margin: 0;
@@ -59,6 +49,10 @@
   padding: 14px 16px;
 }
 
+.menu-list > li:hover {
+  background-color: lightgrey;
+}
+
 .menu-list > li > a {
   color: black;
   text-decoration: none;
@@ -69,7 +63,7 @@
   width: 22px;
 }
 
-#search{
+#search {
   width: 150px;
 }
 </style>

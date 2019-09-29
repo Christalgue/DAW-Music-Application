@@ -12,19 +12,22 @@ export default new Router({
     {
       path: "/",
       name: "Home",
-      component: Home,
-    }, {
+      component: Home
+    },
+    {
       path: "/artist",
       name: "Artist",
       component: Artist
-    }, {
+    },
+    {
       path: "/album",
       name: "Album",
       component: Album
-    }, {
+    },
+    {
       path: "/settings",
       name: "Settings",
       component: UserSettings
     }
-  ],
+  ]
 });

@@ -11,7 +11,11 @@
     </div>
     <div class="album-description bordered">
       <div class="info-album">
-        <img class="album-cover" src="https://upload.wikimedia.org/wikipedia/en/5/51/Michael_Jackson_-_Bad.png" alt="Bad album cover">
+        <img
+          class="album-cover"
+          src="https://upload.wikimedia.org/wikipedia/en/5/51/Michael_Jackson_-_Bad.png"
+          alt="Bad album cover"
+        />
         <ul class="info-album-list">
           <li>
             Pop
@@ -29,19 +33,19 @@
           <p class="song-number">1</p>
           <p class="song-title">Bad</p>
           <p class="song-duration">4:07</p>
-          <play-button/>
+          <play-button />
         </li>
         <li>
           <p class="song-number">2</p>
           <p class="song-title">The Way You Make Me Feel</p>
           <p class="song-duration">4:58</p>
-          <play-button/>
+          <play-button />
         </li>
         <li>
           <p class="song-number">3</p>
           <p class="song-title">Speed Demon</p>
           <p class="song-duration">4:02</p>
-          <play-button/>
+          <play-button />
         </li>
       </ol>
     </div>

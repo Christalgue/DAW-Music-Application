@@ -131,4 +131,8 @@ export default {
   text-decoration: none;
   color: black;
 }
+
+.hyperlink-decoration:hover {
+  text-decoration: underline;
+}
 </style>
