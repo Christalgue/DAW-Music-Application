@@ -3,7 +3,7 @@ import Router from "vue-router";
 import Home from "@/components/Home";
 import Album from "@/components/Album";
 import Artist from "@/components/Artist";
-import Playlists from "@/components/Playlists"
+import Playlists from "@/components/Playlists";
 import UserSettings from "@/components/UserSettings";
 
 Vue.use(Router);
