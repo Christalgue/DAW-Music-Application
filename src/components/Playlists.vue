@@ -1,15 +1,20 @@
 <template>
   <div>
-    <h1>Playlists</h1>
-    <input v-model="playlistInput" placeholder="Your new playlist's name" />
-    <button
-      class="create_playlist"
-      v-if="playlistInput !== ''"
-      v-on:click="createPlaylist"
-    >
-      Create new playlist
-    </button>
-    <div class="playlists">
+    <div class="main-title bordered">
+      <h1>Playlists</h1>
+    </div>
+    <div class="bordered">
+      <span class="playlist-title">Create a new playlist:</span>
+      <input v-model="playlistInput" placeholder="Your new playlist's name" />
+      <button
+        class="create_playlist"
+        v-if="playlistInput !== ''"
+        v-on:click="createPlaylist"
+      >
+        Create new playlist
+      </button>
+    </div>
+    <div class="playlists bordered">
       <Playlist
         v-for="playlist in userLists"
         v-bind:playlist="playlist"
@@ -63,4 +68,11 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.playlist-title {
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 15px;
+}
+</style>

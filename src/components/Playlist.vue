@@ -1,22 +1,26 @@
 <template>
   <div class="playlist">
-    <div>{{ playlist.name }}</div>
-    <input
-      v-model="newPlaylistName"
-      placeholder="Write the new name of your playlist"
-    />
-    <button
-      class="rename"
-      v-if="newPlaylistName !== ''"
-      v-on:click="renamePlaylist()"
-    >
-      Rename playlist
-    </button>
-    <button class="add_track" v-on:click="addTrack()">Add track</button>
-    <button class="delete" v-on:click="deletePlaylist(playlist.id)">
-      Delete playlist
-    </button>
-    <div class="track">
+    <span class="playlist-title" id="playlistName" v-on:click="display()">{{
+      playlist.name
+    }}</span>
+    <span class="update-playlist">
+      <input
+        v-model="newPlaylistName"
+        placeholder="Write the new name of your playlist"
+      />
+      <button
+        class="rename"
+        v-if="newPlaylistName !== ''"
+        v-on:click="renamePlaylist()"
+      >
+        Rename playlist
+      </button>
+      <button class="add_track" v-on:click="addTrack()">Add track</button>
+      <button class="delete" v-on:click="deletePlaylist(playlist.id)">
+        Delete playlist
+      </button>
+    </span>
+    <div v-if="displayTracks" >
       <Track
         v-for="track in playlist.tracks"
         v-bind:track="track"
@@ -51,6 +55,7 @@ export default {
 
   data: () => ({
     newPlaylistName: "",
+    displayTracks: false,
     tracks: []
   }),
 
@@ -85,9 +90,25 @@ export default {
       } catch (err) {
         console.log(err);
       }
+    },
+
+    display() {
+      this.displayTracks = !this.displayTracks;
     }
   }
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+#playlistName:hover {
+  cursor: pointer;
+}
+.playlist {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.update-playlist {
+  display: inline;
+  float: right;
+}
+</style>
