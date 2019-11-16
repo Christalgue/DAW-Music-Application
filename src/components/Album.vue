@@ -13,7 +13,7 @@
     <div class="album-description bordered">
       <div class="info-album">
         <img
-          class="album-cover"
+          class="album-cover-main"
           v-bind:src="album.image"
           alt="Album cover image"
         />
@@ -34,7 +34,7 @@
           <p class="song-number">{{ track.trackNumber }}</p>
           <p class="song-title"><plus-button />{{ track.trackName }}</p>
           <p class="song-duration">{{ track.length }}</p>
-          <audio controls><source v-bind:src="track.previewUrl"></audio>
+          <audio controls><source v-bind:src="track.previewUrl" /></audio>
         </li>
       </ol>
     </div>
@@ -55,7 +55,7 @@ export default {
   comments: {
     "plus-button": PlusButton
   },
-  data () {
+  data() {
     return {
       albumId: 0,
       album: {
@@ -69,7 +69,7 @@ export default {
         url: "",
         image: ""
       }
-    }
+    };
   },
   async created() {
     this.albumId = this.$route.params.albumId;
@@ -87,9 +87,9 @@ export default {
 
     // add mm:ss track length to the data
     for (var track of this.album.tracks) {
-      track["length"] = millisecondsToTrackLength(track.trackTimeMillis)
+      track["length"] = millisecondsToTrackLength(track.trackTimeMillis);
     }
-  },
+  }
 };
 </script>
 
@@ -114,11 +114,11 @@ export default {
   padding: 0;
 }
 
-.album-cover {
-  max-width: 21%;
+.album-cover-main {
+  max-width: 40%;
   height: auto;
-  margin-left: 70%;
+  margin-left: 75%;
   margin-right: auto;
 }
-/* TODO: fix CSS for album image to get a decent size */
+
 </style>
