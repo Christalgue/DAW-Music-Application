@@ -11,40 +11,14 @@
       <h2>Albums</h2>
       <div>
         <ul class="album-list">
-          <li>
+          <li v-for="album in albums">
             <router-link class="hyperlink-decoration" to="/album">
               <img
                 class="album-cover"
-                src="https://upload.wikimedia.org/wikipedia/en/5/51/Michael_Jackson_-_Bad.png"
-                alt="Bad album cover"
+                v-bind:src="album.artworkUrl100"
+                alt="Album cover image"
               />
-              <h3 class="album-title">
-                Bad
-              </h3>
-            </router-link>
-          </li>
-          <li>
-            <router-link class="hyperlink-decoration" to="/artist">
-              <img
-                class="album-cover"
-                src="https://upload.wikimedia.org/wikipedia/en/thumb/5/55/Michael_Jackson_-_Thriller.png/220px-Michael_Jackson_-_Thriller.png"
-                alt="Thriller album cover"
-              />
-              <h3 class="album-title">
-                Thriller
-              </h3>
-            </router-link>
-          </li>
-          <li>
-            <router-link class="hyperlink-decoration" to="/artist">
-              <img
-                class="album-cover"
-                src="https://upload.wikimedia.org/wikipedia/en/f/f6/Off_the_wall.jpg"
-                alt="Off the wall album cover"
-              />
-              <h3 class="album-title">
-                Off the wall
-              </h3>
+              <h4 class="album-title">{{ album.collectionName }}</h4>
             </router-link>
           </li>
         </ul>
@@ -69,7 +43,8 @@ export default {
         name: "",
         genre: "",
         url: ""
-      }
+      },
+      albums: []
     };
   },
   async created() {
@@ -77,6 +52,8 @@ export default {
       this.artist.name = artistInfo.artistName;
       this.artist.genre = artistInfo.primaryGenreName;
       this.artist.url = artistInfo.artistLinkUrl;
+
+      this.albums = await api.getArtistAlbums(ARTIST_ID);
   }
 }
 </script>

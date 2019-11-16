@@ -113,3 +113,14 @@ export const getArtist = id => {
       console.log(err.message);
     });
 };
+
+export const getArtistAlbums = id => {
+  return fetch(`${BASE_URL}/artists/${id}/albums`)
+    .then(response => response.json())
+    .then(response => {
+      return response.results;
+    })
+    .catch(err => {
+      console.log(err.message);
+    });
+};
