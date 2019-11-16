@@ -102,3 +102,14 @@ export const deleteTrack = (trackId, playlistId) => {
     console.log(err.message);
   });
 };
+
+export const getArtist = id => {
+  return fetch(`${BASE_URL}/artists/${id}`)
+    .then(response => response.json())
+    .then(response => {
+      return response.results[0];
+    })
+    .catch(err => {
+      console.log(err.message);
+    });
+};

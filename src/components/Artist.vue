@@ -1,13 +1,11 @@
 <template>
   <div>
     <div class="main-title bordered">
-      <h1>Michael Jackson</h1>
-      <itunes-icon
-        href="https://music.apple.com/fr/artist/michael-jackson/32940"
-      />
+      <h1>{{ artist.name }}</h1>
+      <itunes-icon v-bind:href="artist.url" />
     </div>
     <div class="title bordered">
-      <h2>Pop</h2>
+      <h2>{{ artist.genre }}</h2>
     </div>
     <div class="albums bordered">
       <h2>Albums</h2>
@@ -57,12 +55,30 @@
 
 <script>
 import ItunesIcon from "./ItunesIcon";
+import * as api from "../scripts/api";
+
+const ARTIST_ID = "32940";  // TODO: move this elsewhere to make it more dynamic
 
 export default {
   components: {
-    "itunes-icon": ItunesIcon
+    ItunesIcon
+  },
+  data () {
+    return {
+      artist: {
+        name: "",
+        genre: "",
+        url: ""
+      }
+    };
+  },
+  async created() {
+      let artistInfo = await api.getArtist(ARTIST_ID);
+      this.artist.name = artistInfo.artistName;
+      this.artist.genre = artistInfo.primaryGenreName;
+      this.artist.url = artistInfo.artistLinkUrl;
   }
-};
+}
 </script>
 
 <style>
