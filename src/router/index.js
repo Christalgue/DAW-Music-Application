@@ -21,7 +21,7 @@ export default new Router({
       component: Artist
     },
     {
-      path: "/album",
+      path: "/album/:albumId",
       name: "Album",
       component: Album
     },

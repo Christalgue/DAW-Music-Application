@@ -12,7 +12,7 @@
       <div>
         <ul class="album-list">
           <li v-for="album in albums">
-            <router-link class="hyperlink-decoration" to="/album">
+            <router-link class="hyperlink-decoration" :to="{ name: 'Album', params: { albumId: album.collectionId } }">
               <img
                 class="album-cover"
                 v-bind:src="album.artworkUrl100"

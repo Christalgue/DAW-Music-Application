@@ -63,7 +63,15 @@ export default {
   },
   comments: {
     "play-button": PlayButton
-  }
+  },
+  data () {
+    return {
+      albumId: 0
+    }
+  },
+  created() {
+    this.albumId = this.$route.params.albumId;
+  },
 };
 </script>
 
