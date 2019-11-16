@@ -31,7 +31,6 @@
 import ItunesIcon from "./ItunesIcon";
 import * as api from "../scripts/api";
 
-const ARTIST_ID = "32940";  // TODO: move this elsewhere to make it more dynamic
 
 export default {
   components: {
@@ -42,18 +41,19 @@ export default {
       artist: {
         name: "",
         genre: "",
-        url: ""
+        url: "",
+        id: "32940"  // default to Michael Jackson for now
       },
       albums: []
     };
   },
   async created() {
-      let artistInfo = await api.getArtist(ARTIST_ID);
+      let artistInfo = await api.getArtist(this.artist.id);
       this.artist.name = artistInfo.artistName;
       this.artist.genre = artistInfo.primaryGenreName;
       this.artist.url = artistInfo.artistLinkUrl;
 
-      this.albums = await api.getArtistAlbums(ARTIST_ID);
+      this.albums = await api.getArtistAlbums(this.artist.id);
   }
 }
 </script>
