@@ -48,12 +48,19 @@ export default {
     };
   },
   async created() {
-      let artistInfo = await api.getArtist(this.artist.id);
-      this.artist.name = artistInfo.artistName;
-      this.artist.genre = artistInfo.primaryGenreName;
-      this.artist.url = artistInfo.artistLinkUrl;
-
-      this.albums = await api.getArtistAlbums(this.artist.id);
+      try {
+        let artistInfo = await api.getArtist(this.artist.id);
+        this.artist.name = artistInfo.artistName;
+        this.artist.genre = artistInfo.primaryGenreName;
+        this.artist.url = artistInfo.artistLinkUrl;
+      } catch(err) {
+        console.log(err);
+      }
+      try {
+        this.albums = await api.getArtistAlbums(this.artist.id);
+      } catch (err) {
+        console.log(err);
+      }
   }
 }
 </script>

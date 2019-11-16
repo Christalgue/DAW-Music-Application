@@ -73,21 +73,24 @@ export default {
   },
   async created() {
     this.albumId = this.$route.params.albumId;
-    let albumInfo = await api.getAlbum(this.albumId);
 
-    this.album.artistName = albumInfo.artistName;
-    this.album.title = albumInfo.collectionName;
-    this.album.image = albumInfo.artworkUrl100;
-    this.album.artistId = albumInfo.artistId;
-    this.album.genre = albumInfo.primaryGenreName;
-    this.album.trackCount = albumInfo.trackCount;
-    this.album.releaseDate = getHumanReleaseDate(albumInfo.releaseDate);
-    this.album.url = albumInfo.collectionViewUrl;
-    this.album.tracks = await api.getAlbumTracks(this.albumId);
+    try {
+      let albumInfo = await api.getAlbum(this.albumId);
+      this.album.artistName = albumInfo.artistName;
+      this.album.title = albumInfo.collectionName;
+      this.album.image = albumInfo.artworkUrl100;
+      this.album.artistId = albumInfo.artistId;
+      this.album.genre = albumInfo.primaryGenreName;
+      this.album.trackCount = albumInfo.trackCount;
+      this.album.releaseDate = getHumanReleaseDate(albumInfo.releaseDate);
+      this.album.url = albumInfo.collectionViewUrl;
+      this.album.tracks = await api.getAlbumTracks(this.albumId);
 
-    // add mm:ss track length to the data
-    for (var track of this.album.tracks) {
-      track["length"] = millisecondsToTrackLength(track.trackTimeMillis);
+      for (var track of this.album.tracks) {  // add mm:ss track length to the data
+        track["length"] = millisecondsToTrackLength(track.trackTimeMillis);
+      }
+    } catch (err) {
+      console.log(err);
     }
   }
 };
