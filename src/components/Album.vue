@@ -1,50 +1,38 @@
 <template>
   <div>
     <div class="main-title bordered">
-      <h1>Bad</h1>
-      <itunes-icon href="https://music.apple.com/fr/album/bad/559334659" />
+      <h1>{{ album.artistName }}'s {{ album.title }}</h1>
+      <itunes-icon v-bind:href="album.url" />
     </div>
     <div class="title bordered">
       <router-link class="hyperlink-decoration" to="/artist">
-        <h2>Michael Jackson</h2>
+        <h2>{{  }}</h2>
       </router-link>
     </div>
     <div class="album-description bordered">
       <div class="info-album">
         <img
           class="album-cover"
-          src="https://upload.wikimedia.org/wikipedia/en/5/51/Michael_Jackson_-_Bad.png"
-          alt="Bad album cover"
+          v-bind:src="album.image"
+          alt="Album cover image"
         />
         <ul class="info-album-list">
           <li>
-            Pop
+            {{ album.genre }}
           </li>
           <li>
-            Released on August the 31st of 1987
+            Released on {{ album.releaseDate }}
           </li>
           <li>
-            11 tracks
+            {{ album.trackCount }} tracks
           </li>
         </ul>
       </div>
       <ol class="songs-list">
-        <li>
-          <p class="song-number">1</p>
-          <p class="song-title">Bad</p>
-          <p class="song-duration">4:07</p>
-          <play-button />
-        </li>
-        <li>
-          <p class="song-number">2</p>
-          <p class="song-title">The Way You Make Me Feel</p>
-          <p class="song-duration">4:58</p>
-          <play-button />
-        </li>
-        <li>
-          <p class="song-number">3</p>
-          <p class="song-title">Speed Demon</p>
-          <p class="song-duration">4:02</p>
+        <li v-for="track in album.tracks">
+          <p class="song-number">{{ track.trackNumber }}</p>
+          <p class="song-title">{{ track.trackName }}</p>
+          <p class="song-duration">{{ track.length }}</p>
           <play-button />
         </li>
       </ol>
@@ -55,6 +43,8 @@
 <script>
 import ItunesIcon from "./ItunesIcon";
 import PlayButton from "./PlayButton";
+import * as api from "../scripts/api";
+import { millisecondsToTrackLength, getHumanReleaseDate } from "../scripts/helper";
 
 export default {
   components: {
@@ -66,11 +56,38 @@ export default {
   },
   data () {
     return {
-      albumId: 0
+      albumId: 0,
+      album: {
+        title: "",
+        artistName: "",
+        artistId: "",
+        genre: "",
+        releaseDate: "",
+        trackCount: 0,
+        tracks: [],
+        url: "",
+        image: ""
+      }
     }
   },
-  created() {
+  async created() {
     this.albumId = this.$route.params.albumId;
+    let albumInfo = await api.getAlbum(this.albumId);
+
+    this.album.artistName = albumInfo.artistName;
+    this.album.title = albumInfo.collectionName;
+    this.album.image = albumInfo.artworkUrl100;
+    this.album.artistId = albumInfo.artistId;
+    this.album.genre = albumInfo.primaryGenreName;
+    this.album.trackCount = albumInfo.trackCount;
+    this.album.releaseDate = getHumanReleaseDate(albumInfo.releaseDate);
+    this.album.url = albumInfo.collectionViewUrl;
+    this.album.tracks = await api.getAlbumTracks(this.albumId);
+
+    // add mm:ss track length to the data
+    for (var track of this.album.tracks) {
+      track["length"] = millisecondsToTrackLength(track.trackTimeMillis)
+    }
   },
 };
 </script>
@@ -95,4 +112,5 @@ export default {
   grid-gap: 1rem;
   padding: 0;
 }
+/* TODO: fix CSS for album image to get a decent size */
 </style>

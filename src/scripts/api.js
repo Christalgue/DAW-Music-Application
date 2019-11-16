@@ -124,3 +124,26 @@ export const getArtistAlbums = id => {
       console.log(err.message);
     });
 };
+
+export const getAlbum = id => {
+  return fetch(`${BASE_URL}/albums/${id}`)
+    .then(response => response.json())
+    .then(response => {
+      return response.results[0];
+    })
+    .catch(err => {
+      console.log(err.message);
+    });
+};
+
+// TODO: if time allows for it, reduce the amount of data returned
+export const getAlbumTracks = id => {
+  return fetch(`${BASE_URL}/albums/${id}/tracks`)
+    .then(response => response.json())
+    .then(response => {
+      return response.results;
+    })
+    .catch(err => {
+      console.log(err.message);
+    });
+};
