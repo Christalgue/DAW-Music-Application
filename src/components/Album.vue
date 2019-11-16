@@ -33,7 +33,7 @@
           <p class="song-number">{{ track.trackNumber }}</p>
           <p class="song-title">{{ track.trackName }}</p>
           <p class="song-duration">{{ track.length }}</p>
-          <play-button />
+          <audio controls><source v-bind:src="track.previewUrl"></audio>
         </li>
       </ol>
     </div>
@@ -42,17 +42,12 @@
 
 <script>
 import ItunesIcon from "./ItunesIcon";
-import PlayButton from "./PlayButton";
 import * as api from "../scripts/api";
 import { millisecondsToTrackLength, getHumanReleaseDate } from "../scripts/helper";
 
 export default {
   components: {
-    PlayButton,
     "itunes-icon": ItunesIcon
-  },
-  comments: {
-    "play-button": PlayButton
   },
   data () {
     return {
