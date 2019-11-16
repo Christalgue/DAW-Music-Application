@@ -2,12 +2,12 @@
   <div>
     <div class="main-title bordered">
       <plus-button />
-      <h1>{{ album.artistName }}'s {{ album.title }}</h1>
+      <h1>{{ album.title }}</h1>
       <itunes-icon v-bind:href="album.url" />
     </div>
     <div class="title bordered">
       <router-link class="hyperlink-decoration" to="/artist">
-        <h2>{{  }}</h2>
+        <h2>{{ album.artistName }}</h2>
       </router-link>
     </div>
     <div class="album-description bordered">
@@ -112,6 +112,13 @@ export default {
   grid-template-columns: 1fr 6fr 1fr 1fr;
   grid-gap: 1rem;
   padding: 0;
+}
+
+.album-cover {
+  max-width: 21%;
+  height: auto;
+  margin-left: 70%;
+  margin-right: auto;
 }
 /* TODO: fix CSS for album image to get a decent size */
 </style>
