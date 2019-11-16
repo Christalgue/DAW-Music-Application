@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="main-title bordered">
+      <plus-button />
       <h1>{{ album.artistName }}'s {{ album.title }}</h1>
       <itunes-icon v-bind:href="album.url" />
     </div>
@@ -31,7 +32,7 @@
       <ol class="songs-list">
         <li v-for="track in album.tracks">
           <p class="song-number">{{ track.trackNumber }}</p>
-          <p class="song-title">{{ track.trackName }}</p>
+          <p class="song-title"><plus-button />{{ track.trackName }}</p>
           <p class="song-duration">{{ track.length }}</p>
           <audio controls><source v-bind:src="track.previewUrl"></audio>
         </li>
@@ -42,12 +43,17 @@
 
 <script>
 import ItunesIcon from "./ItunesIcon";
+import PlusButton from "./PlusButton";
 import * as api from "../scripts/api";
 import { millisecondsToTrackLength, getHumanReleaseDate } from "../scripts/helper";
 
 export default {
   components: {
+    PlusButton,
     "itunes-icon": ItunesIcon
+  },
+  comments: {
+    "plus-button": PlusButton
   },
   data () {
     return {
