@@ -42,13 +42,14 @@ export default {
         name: "",
         genre: "",
         url: "",
-        id: "32940"  // default to Michael Jackson for now
+        id: 0
       },
       albums: []
     };
   },
   async created() {
       try {
+        this.artist.id = this.$route.params.artistId;
         let artistInfo = await api.getArtist(this.artist.id);
         this.artist.name = artistInfo.artistName;
         this.artist.genre = artistInfo.primaryGenreName;

@@ -16,7 +16,7 @@ export default new Router({
       component: Home
     },
     {
-      path: "/artist",
+      path: "/artist/:artistId",
       name: "Artist",
       component: Artist
     },

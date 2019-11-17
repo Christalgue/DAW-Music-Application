@@ -6,7 +6,7 @@
       <itunes-icon v-bind:href="album.url" />
     </div>
     <div class="title bordered">
-      <router-link class="hyperlink-decoration" to="/artist">
+      <router-link class="hyperlink-decoration" :to="{ name: 'Artist', params: { artistId: this.album.artistId } }">
         <h2>{{ album.artistName }}</h2>
       </router-link>
     </div>
