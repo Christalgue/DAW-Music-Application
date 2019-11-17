@@ -32,7 +32,10 @@
       <ol class="songs-list">
         <li v-for="track in album.tracks">
           <p class="song-number">{{ track.trackNumber }}</p>
-          <p class="song-title"><plus-button />{{ track.trackName }}</p>
+          <p class="song-title">
+            <plus-button v-on:click.native="addTrackToPlaylist(track)"/>
+            {{ track.trackName }}
+          </p>
           <p class="song-duration">{{ track.length }}</p>
           <audio controls><source v-bind:src="track.previewUrl" /></audio>
         </li>
@@ -47,6 +50,9 @@ import PlusButton from "./PlusButton";
 import * as api from "../scripts/api";
 import { millisecondsToTrackLength, getHumanReleaseDate } from "../scripts/helper";
 
+// id for test_marco playlist, hardcoded for now, must add choice of lists later
+const PLAYLIST_ID = "5dd090292e266c000420391b";  
+
 export default {
   components: {
     PlusButton,
@@ -54,6 +60,15 @@ export default {
   },
   comments: {
     "plus-button": PlusButton
+  },
+  methods: {
+    async addTrackToPlaylist(track) {
+      try {
+        await api.addTrack(track, PLAYLIST_ID);
+      } catch (err) {
+        console.log(err);
+      }
+    }
   },
   data() {
     return {
