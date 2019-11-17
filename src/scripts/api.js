@@ -11,7 +11,6 @@ export const getPlaylists = () => {
           ownerPlaylists.push(playlists[i]);
         }
       }
-      console.log(ownerPlaylists);
       return ownerPlaylists;
     })
     .catch(err => {
@@ -50,7 +49,7 @@ export const createPlaylist = playlistName => {
     });
 };
 
-export const renamePlaylist = (newName, id) => {
+export const renamePlaylist = (newName, tracks, id) => {
   return fetch(`${BASE_URL}/playlists/${id}`, {
     method: "PUT",
     headers: {
@@ -58,7 +57,8 @@ export const renamePlaylist = (newName, id) => {
     },
     body: JSON.stringify({
       name: newName,
-      owner: OWNER_MAIL
+      owner: OWNER_MAIL,
+      tracks: tracks
     })
   })
     .then(response => response.json())

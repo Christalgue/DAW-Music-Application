@@ -63,8 +63,8 @@ export default {
     async renamePlaylist() {
       try {
         this.playlist.name = this.newPlaylistName;
-        const { id, name } = this.playlist;
-        await api.renamePlaylist(name, id);
+        const { id, name, tracks } = this.playlist;
+        await api.renamePlaylist(name, tracks, id);
         this.newPlaylistName = "";
       } catch (err) {
         console.log(err);
