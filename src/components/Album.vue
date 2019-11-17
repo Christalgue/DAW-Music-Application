@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="main-title bordered">
-      <plus-button />
+      <plus-button v-on:click.native="addAlbumTracksToPlaylist" />
       <h1>{{ album.title }}</h1>
       <itunes-icon v-bind:href="album.url" />
     </div>
@@ -65,6 +65,16 @@ export default {
     async addTrackToPlaylist(track) {
       try {
         await api.addTrack(track, PLAYLIST_ID);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async addAlbumTracksToPlaylist() {
+      try {
+        for (var track of this.album.tracks) {  // could we use map with async?
+          await api.addTrack(track, PLAYLIST_ID);
+        }
+        this.album.tracks.map(x=> console.log(x));
       } catch (err) {
         console.log(err);
       }
