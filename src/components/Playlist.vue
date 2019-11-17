@@ -84,7 +84,7 @@ export default {
       try {
         await api.deleteTrack(trackId, this.playlist.id);
         let index = this.playlist.tracks.findIndex(
-          track => track.id === trackId
+          track => track.trackId === trackId
         );
         this.playlist.tracks.splice(index, 1);
       } catch (err) {

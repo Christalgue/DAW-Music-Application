@@ -74,7 +74,6 @@ export default {
         for (var track of this.album.tracks) {  // could we use map with async?
           await api.addTrack(track, PLAYLIST_ID);
         }
-        this.album.tracks.map(x=> console.log(x));
       } catch (err) {
         console.log(err);
       }
