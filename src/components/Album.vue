@@ -85,7 +85,7 @@ export default {
       album: {
         title: "",
         artistName: "",
-        artistId: "",
+        artistId: 0,
         genre: "",
         releaseDate: "",
         trackCount: 0,
