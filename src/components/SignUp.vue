@@ -6,7 +6,7 @@
         <input v-model="name" type="text">
 
         <label for="email"><b>Email</b></label>
-        <input v-model="email" type="email" v-bind:class="{ emailError: isEMailError }" @keydown="clearError">
+        <input v-model="email" type="email" v-bind:class="{ emailError: isEmailError }" @keydown="clearError">
 
         <label for="password"><b>Password</b></label>
         <input v-model="password" type="password">
@@ -28,23 +28,25 @@ export default {
       name: '',
       email: '',
       password: '',
-      isEMailError: false
+      isEmailError: false
     }
   },
   methods: {
     signup () {
       let data = {name: this.name, email: this.email, password: this.password};
-      sendPOST('/api/signup', data, response => {
+      sendPOST('/api/signup', data)
+      .then(response => {
         if (response.status == 400) {
           this.email = "Not available, choose again!";
-          this.isEMailError = true;
+          this.password = "";
+          this.isEmailError = true;
         }
       });
     },
     clearError () {
-      if (this.isEMailError) {
+      if (this.isEmailError) {
         this.email = "";
-        this.isEMailError = false;
+        this.isEmailError = false;
       }
     }
   }

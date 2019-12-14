@@ -1,7 +1,8 @@
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
-import { isAuthenticated } from "./scripts/auth";
+import Cookies from "js-cookie";
+import { sendPOST } from "./backend/helpers";
 
 Vue.config.productionTip = false;
 
@@ -9,8 +10,22 @@ Vue.config.productionTip = false;
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
 
-  if (requiresAuth && !isAuthenticated()) next("/login");
-  else next();
+  if (requiresAuth) {
+    console.log("AUTH REQUIRED");
+    sendPOST("/api/auth", { token: Cookies.get("token") }).then(response => {
+      console.log("SENT POST AUTH");
+      if (response.status !== 200) {
+        console.log("auth fail!");
+        next("/login");
+      } else {
+        console.log("auth success");
+        next();
+      }
+    });
+  } else {
+    console.log("auth was required and cookie worked!");
+    next();
+  }
 });
 
 new Vue({
