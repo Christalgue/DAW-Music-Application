@@ -43,7 +43,6 @@ const routes = app => {
 
       const token = uuid();
       users[correspondingUserIndex].token = token;
-      console.log(users);
       res.send(JSON.stringify({ token: token }));
     } catch (err) {
       res.sendStatus(400);
@@ -52,12 +51,12 @@ const routes = app => {
 
   app.post("/api/auth", function(req, res) {
     try {
-			let token = req.body.token;
-			console.log(token);
+      let token = req.body.token;
+      console.log(token);
       let correspondingUserIndex = users.findIndex(
         user => user.token === token
-			);
-			console.log(correspondingUserIndex);
+      );
+      console.log(correspondingUserIndex);
 
       if (correspondingUserIndex === -1) {
         throw "Expired or invalid token.";

@@ -13,9 +13,6 @@
           Playlists
         </router-link>
       </li>
-      <li>
-        Michelle
-      </li>
       <li class="nav-hovered">
         <router-link to="/settings">
           <img src="../images/user-cog-solid.svg" alt="user settings" />

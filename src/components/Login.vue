@@ -43,6 +43,7 @@ export default {
             Cookies.set('token', response.token, {
                 expires: in30Minutes
             });
+            router.go("/")
           });
         }
       });

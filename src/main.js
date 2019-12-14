@@ -11,19 +11,14 @@ router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
 
   if (requiresAuth) {
-    console.log("AUTH REQUIRED");
     sendPOST("/api/auth", { token: Cookies.get("token") }).then(response => {
-      console.log("SENT POST AUTH");
       if (response.status !== 200) {
-        console.log("auth fail!");
         next("/login");
       } else {
-        console.log("auth success");
         next();
       }
     });
   } else {
-    console.log("auth was required and cookie worked!");
     next();
   }
 });
