@@ -5,7 +5,7 @@
     </div>
     <div class="main-title bordered">
       <div class="login-signup-box">
-        <component v-bind:is="component" />
+        <component v-bind:is="component" @SignedUpShowLogin="toggle"/>
         <br/><div id="signup-link" v-on:click="toggle">{{ signupLinkText }}</div>
       </div>
     </div>
@@ -42,7 +42,6 @@ export default {
       }
     }
   }
-
 }
 </script>
 

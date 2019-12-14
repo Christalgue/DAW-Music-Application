@@ -40,6 +40,12 @@ export default {
           this.email = "Not available, choose again!";
           this.password = "";
           this.isEmailError = true;
+        } else { // success
+          this.name = "";
+          this.email = "";
+          this.password = "";
+          alert("Thank you for signing up, you may login now."); // TODO: time permitting, use a prettier message for user feedback
+          this.$emit("SignedUpShowLogin");
         }
       });
     },

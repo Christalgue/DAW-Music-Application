@@ -39,11 +39,11 @@ export default {
           this.isLoginError = true;
         } else {
           response.json().then(response => {
-            let in30Minutes = 1 / 2;  // TODO: change expiration (currently 12 hours)
+            let expirationInDays = 1 / 2;  // TODO: change expiration (currently 12 hours)
             Cookies.set('token', response.token, {
-                expires: in30Minutes
+                expires: expirationInDays
             });
-            router.go("/")
+            this.$router.go(-1);  // now that user did log in, go where the user came from before the login
           });
         }
       });
