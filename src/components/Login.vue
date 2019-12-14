@@ -1,12 +1,12 @@
 <template>
   <div id="login-form">
-    <form action="/login" method="post" autocomplete="off">
+    <form autocomplete="off" @submit.prevent="login">
       <div class="loginbox">
-        <label for="username"><b>Email</b></label>
-        <input type="text" name="username">
+        <label for="email"><b>Email</b></label>
+        <input v-model="email" type="email">
 
         <label for="password"><b>Password</b></label>
-        <input type="password" name="password">
+        <input v-model="password" type="password">
             
         <button type="submit">Login</button>
       </div>
@@ -18,12 +18,25 @@
 <script>
 export default {
   name: "Login",
+  data () {
+    return {
+      email: '',
+      password: ''
+    }
+  },
+  methods: {
+    login () {
+      // TODO: auth
+      console.log(this.email)
+      console.log(this.password)
+    }
+  }
 };
 </script>
 
 
 <style scoped>
-input[type=text], input[type=password] {
+input[type=email], input[type=password] {
   width: 100%;
   padding: 12px 20px;
   margin: 9px 0;

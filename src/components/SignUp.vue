@@ -1,15 +1,15 @@
 <template>
   <div id="signup-form">
-    <form action="/signup" method="post" autocomplete="off">
+    <form autocomplete="off" @submit.prevent="signup">
       <div class="signupbox">
         <label for="name"><b>Name</b></label>
-        <input type="text" name="name">
+        <input v-model="name" type="text">
 
         <label for="email"><b>Email</b></label>
-        <input type="text" name="email">
+        <input v-model="email" type="email">
 
         <label for="password"><b>Password</b></label>
-        <input type="password" name="password">
+        <input v-model="password" type="password">
             
         <button type="submit">Sign up</button>
       </div>
@@ -20,13 +20,28 @@
 
 <script>
 export default {
-  name: "SignUp"
+  name: "SignUp",
+  data () {
+    return {
+      name: '',
+      email: '',
+      password: ''
+    }
+  },
+  methods: {
+    signup () {
+      // TODO: sign up
+      console.log(this.name)
+      console.log(this.email)
+      console.log(this.password)
+    }
+  }
 };
 </script>
 
 
 <style>
-input[type=text], input[type=password] {
+input[type=text], input[type=email], input[type=password] {
   width: 100%;
   padding: 12px 20px;
   margin: 9px 0;
