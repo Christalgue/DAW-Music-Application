@@ -5,7 +5,10 @@
       <itunes-icon v-bind:href="artist.url" />
     </div>
     <div class="bio bordered">
-      <p v-html="artist.summaryBio"></p>
+      <ul>
+        <li><span v-html="artist.summaryBio"></span></li>
+        <li><br/><span>Similar artists: {{ artist.similarArtistsString }}.</span></li>
+      </ul>
     </div>
     <div class="title bordered">
       <h2>{{ artist.genre }}</h2>
@@ -33,7 +36,7 @@
 <script>
 import ItunesIcon from "./ItunesIcon";
 import * as api from "../scripts/api";
-import { getBiography } from "../scripts/lastfm";
+import { getArtistLastFM, extractSimilarArtistsNames } from "../scripts/lastfm";
 
 
 export default {
@@ -47,7 +50,9 @@ export default {
         genre: "",
         url: "",
         id: 0,
-        summaryBio: "I am the bio!"
+        summaryBio: "I am the bio!",
+        similarArtists: [],
+        similarArtistsString: '',
       },
       albums: []
     };
@@ -61,8 +66,10 @@ export default {
         this.artist.genre = artistInfo.primaryGenreName;
         this.artist.url = artistInfo.artistLinkUrl;
         // LastFM API
-        let artistInfoLastFM = await getBiography(this.artist.name);
-        this.artist.summaryBio = artistInfoLastFM.summary;
+        let artistInfoLastFM = await getArtistLastFM(this.artist.name);
+        this.artist.summaryBio = artistInfoLastFM.bio.summary;
+        this.artist.similarArtists = extractSimilarArtistsNames(artistInfoLastFM.similar.artist);
+        this.artist.similarArtistsString = this.artist.similarArtists.join(", ");
       } catch(err) {
         console.log(err);
       }
@@ -96,6 +103,10 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.bio > ul {
+  list-style-type: none;
 }
 
 .main-title {
