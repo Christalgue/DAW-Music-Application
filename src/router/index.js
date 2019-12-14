@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "@/components/Home";
+import Auth from "@/components/Auth";
 import Album from "@/components/Album";
 import Artist from "@/components/Artist";
 import Playlists from "@/components/Playlists";
@@ -14,26 +15,36 @@ export default new Router({
       path: "/",
       name: "Home",
       component: Home
+      // TODO: add requiresAuth for home?
+    },
+    {
+      path: "/login",
+      name: "Login",
+      component: Auth
     },
     {
       path: "/artist/:artistId",
       name: "Artist",
-      component: Artist
+      component: Artist,
+      meta: { requiresAuth: true }
     },
     {
       path: "/album/:albumId",
       name: "Album",
-      component: Album
+      component: Album,
+      meta: { requiresAuth: true }
     },
     {
       path: "/playlists",
       name: "playlists",
-      component: Playlists
+      component: Playlists,
+      meta: { requiresAuth: true }
     },
     {
       path: "/settings",
       name: "Settings",
-      component: UserSettings
+      component: UserSettings,
+      meta: { requiresAuth: true }
     }
   ]
 });
