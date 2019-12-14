@@ -4,6 +4,9 @@
       <h1>{{ artist.name }}</h1>
       <itunes-icon v-bind:href="artist.url" />
     </div>
+    <div class="bio bordered">
+      <p v-html="artist.summaryBio"></p>
+    </div>
     <div class="title bordered">
       <h2>{{ artist.genre }}</h2>
     </div>
@@ -30,6 +33,7 @@
 <script>
 import ItunesIcon from "./ItunesIcon";
 import * as api from "../scripts/api";
+import { getBiography } from "../scripts/lastfm";
 
 
 export default {
@@ -42,7 +46,8 @@ export default {
         name: "",
         genre: "",
         url: "",
-        id: 0
+        id: 0,
+        summaryBio: "I am the bio!"
       },
       albums: []
     };
@@ -50,10 +55,14 @@ export default {
   async created() {
       try {
         this.artist.id = this.$route.params.artistId;
+        // UBeat API
         let artistInfo = await api.getArtist(this.artist.id);
         this.artist.name = artistInfo.artistName;
         this.artist.genre = artistInfo.primaryGenreName;
         this.artist.url = artistInfo.artistLinkUrl;
+        // LastFM API
+        let artistInfoLastFM = await getBiography(this.artist.name);
+        this.artist.summaryBio = artistInfoLastFM.summary;
       } catch(err) {
         console.log(err);
       }
@@ -77,6 +86,13 @@ export default {
 .main-title,
 .title {
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bio {
+  text-align: left;
   display: flex;
   justify-content: center;
   align-items: center;

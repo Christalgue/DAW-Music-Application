@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="main-title bordered">
-      <h1>Welcome Michelle</h1>
+      <h1>Welcome!</h1>
     </div>
     <div class="title bordered">
       <h2>Your artists :</h2>
