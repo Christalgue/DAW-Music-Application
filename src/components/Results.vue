@@ -65,8 +65,13 @@ export default {
     },
 
     async loadData() {
-      this.search.terms = document.getElementById("search").value;
+      if (document.getElementById("search") !== null) {
+        this.search.terms = document.getElementById("search").value;
+      } else {
+        this.search.terms = "";
+      }
       let search = await api.getGlobalSearch(this.search.terms);
+      console.log(search);
       this.search.resultCount = search.resultCount;
       this.formatData(search.results);
     },
@@ -101,7 +106,7 @@ export default {
             routerName: "Track",
             track: result
           });
-        } /*if (result.wrapperType ===)*/ else {
+        } else if (result.wrapperType !== "audiobook") {
           this.search.results.push({
             name: result.name,
             id: result.userId,
