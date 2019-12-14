@@ -5,6 +5,8 @@ import Album from "@/components/Album";
 import Artist from "@/components/Artist";
 import Playlists from "@/components/Playlists";
 import UserSettings from "@/components/UserSettings";
+import UserPage from "@/components/UserPage";
+import Results from "@/components/Results";
 
 Vue.use(Router);
 
@@ -34,6 +36,16 @@ export default new Router({
       path: "/settings",
       name: "Settings",
       component: UserSettings
+    },
+    {
+      path: "/user",
+      name: "User",
+      component: UserPage
+    },
+    {
+      path: "/result",
+      name: "Result",
+      component: Results
     }
   ]
 });

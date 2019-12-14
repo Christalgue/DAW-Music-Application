@@ -147,3 +147,46 @@ export const getAlbumTracks = id => {
       console.log(err.message);
     });
 };
+
+export const getUser = id => {
+  return fetch(`${BASE_URL}/users/${id}`)
+    .then(response => response.json())
+    .then(response => {
+      return response;
+    })
+    .catch(err => {
+      console.log(err.message);
+    });
+};
+
+export const getGlobalSearch = terms => {
+  return fetch(`${BASE_URL}/search?q=${terms.split(" ").join("+")}`)
+    .then(response => response.json())
+    .then(response => {
+      return response;
+    })
+    .catch(err => {
+      console.log(err.message);
+    });
+};
+
+export const addFollowing = followedId => {
+  return fetch(`${BASE_URL}/follow`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      id: followedId
+    })
+  })
+    .then(response => response.json())
+    .then(response => {
+      return response;
+    })
+    .catch(err => {
+      console.log(err.message);
+    });
+};
+
+

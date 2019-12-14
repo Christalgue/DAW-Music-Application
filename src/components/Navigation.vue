@@ -4,6 +4,9 @@
       <li>
         <label for="search"></label>
         <input id="search" name="q" type="text" placeholder="Mots clés" />
+        <button>
+          <router-link class="hyperlink-decoration" to="/result">Search</router-link>
+        </button>
       </li>
       <li class="nav-hovered">
         <router-link class="hyperlink-decoration" to="/">Home</router-link>
@@ -13,8 +16,10 @@
           Playlists
         </router-link>
       </li>
-      <li>
-        Michelle
+      <li class="nav-hovered">
+        <router-link class="hyperlink-decoration" to="/user">
+          Michelle
+        </router-link>
       </li>
       <li class="nav-hovered">
         <router-link to="/settings">
