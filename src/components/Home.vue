@@ -1,24 +1,61 @@
 <template>
   <div>
     <div class="main-title bordered">
-      <h1>Welcome Michelle</h1>
+      <h1>Welcome!</h1>
     </div>
-    <div class="title bordered">
-      <h2>Your artists :</h2>
-      <ul>
-        <li>
-          <router-link class="hyperlink-decoration" :to="{ name: 'Artist', params: { artistId: 32940 } }">
-            Michael Jackson
-          </router-link>
-        </li>
-        <li>
-          <router-link class="hyperlink-decoration" :to="{ name: 'Artist', params: { artistId: 2820865 } }">
-            The Offspring
-          </router-link>
-        </li>
-      </ul>
+    <div class="main-title bordered">
+      <div class="login-signup-box">
+        <component v-bind:is="component" />
+        <br/><div id="signup-link" v-on:click="toggle">{{ signupLinkText }}</div>
+      </div>
     </div>
   </div>
 </template>
 
-<style></style>
+<script>
+import Login from "./Login";
+import SignUp from "./SignUp";
+
+const SIGN_UP_TEXT = "No account? Click here to sign up";
+const LOG_IN_TEXT = "Already have an account? Click here to log in";
+
+export default {
+  name: 'App',
+  components: {
+    Login,
+    SignUp
+  },
+  data (){
+    return {
+      component: Login,
+      signupLinkText: SIGN_UP_TEXT
+    }
+  },
+  methods: {
+    toggle(){
+      if (this.component === Login) {
+        this.component = SignUp;
+        this.signupLinkText = LOG_IN_TEXT;
+      } else {
+        this.component = Login;
+        this.signupLinkText = SIGN_UP_TEXT;
+      }
+    }
+  }
+
+}
+</script>
+
+<style scoped>
+.login-signup-box {
+  padding: 20px;
+  margin: 1%;
+  width: 15%;
+  min-width: 200px;
+}
+
+#signup-link {
+  font-size: 0.7em;
+  cursor: pointer;
+}
+</style>
