@@ -7,6 +7,7 @@
     <div class="bio bordered">
       <ul>
         <li><span v-html="artist.summaryBio"></span></li>
+        <li><br/><span>Currently on tour? <strong>{{ artist.currentlyOnTour }}</strong>.</span></li>
         <li><br/><span>Similar artists: {{ artist.similarArtistsString }}.</span></li>
       </ul>
     </div>
@@ -36,7 +37,7 @@
 <script>
 import ItunesIcon from "./ItunesIcon";
 import * as api from "../scripts/api";
-import { getArtistLastFM, extractSimilarArtistsNames } from "../scripts/lastfm";
+import { getArtistLastFM, extractSimilarArtistsNames, extractTourStatus } from "../scripts/lastfm";
 
 
 export default {
@@ -53,6 +54,7 @@ export default {
         summaryBio: "I am the bio!",
         similarArtists: [],
         similarArtistsString: '',
+        currentlyOnTour: 'No',
       },
       albums: []
     };
@@ -70,6 +72,7 @@ export default {
         this.artist.summaryBio = artistInfoLastFM.bio.summary;
         this.artist.similarArtists = extractSimilarArtistsNames(artistInfoLastFM.similar.artist);
         this.artist.similarArtistsString = this.artist.similarArtists.join(", ");
+        this.artist.currentlyOnTour = extractTourStatus(artistInfoLastFM);
       } catch(err) {
         console.log(err);
       }
