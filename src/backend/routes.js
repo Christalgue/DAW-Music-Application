@@ -52,11 +52,9 @@ const routes = app => {
   app.post("/api/auth", function(req, res) {
     try {
       let token = req.body.token;
-      console.log(token);
       let correspondingUserIndex = users.findIndex(
         user => user.token === token
       );
-      console.log(correspondingUserIndex);
 
       if (correspondingUserIndex === -1) {
         throw "Expired or invalid token.";
