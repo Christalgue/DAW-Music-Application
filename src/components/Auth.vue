@@ -5,8 +5,9 @@
     </div>
     <div class="main-title bordered">
       <div class="login-signup-box">
-        <component v-bind:is="component" @SignedUpShowLogin="toggle"/>
-        <br/><div id="signup-link" v-on:click="toggle">{{ signupLinkText }}</div>
+        <component v-bind:is="component" @SignedUpShowLogin="toggle" />
+        <br />
+        <div id="signup-link" v-on:click="toggle">{{ signupLinkText }}</div>
       </div>
     </div>
   </div>
@@ -20,19 +21,19 @@ const SIGN_UP_TEXT = "No account? Click here to sign up";
 const LOG_IN_TEXT = "Already have an account? Click here to log in";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     Login,
     SignUp
   },
-  data (){
+  data() {
     return {
       component: Login,
       signupLinkText: SIGN_UP_TEXT
-    }
+    };
   },
   methods: {
-    toggle(){
+    toggle() {
       if (this.component === Login) {
         this.component = SignUp;
         this.signupLinkText = LOG_IN_TEXT;
@@ -42,7 +43,7 @@ export default {
       }
     }
   }
-}
+};
 </script>
 
 <style scoped>

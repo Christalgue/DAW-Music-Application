@@ -3,44 +3,54 @@
     <form autocomplete="off" @submit.prevent="signup">
       <div class="signupbox">
         <label for="name"><b>Name</b></label>
-        <input v-model="name" type="text">
+        <input v-model="name" type="text" />
 
         <label for="email"><b>Email</b></label>
-        <input v-model="email" type="email" v-bind:class="{ emailError: isEmailError }" @keydown="clearError">
+        <input v-model="email" type="email" v-bind:class="{ emailError: isEmailError }" @keydown="clearError" />
 
         <label for="password"><b>Password</b></label>
-        <input v-model="password" type="password">
-            
+        <input v-model="password" type="password" />
         <button type="submit">Sign up</button>
       </div>
     </form>
   </div>
 </template>
 
-
 <script>
-import { sendPOST } from '../backend/helpers';
+import { sendPOST } from "../backend/helpers";
+import * as api from "../scripts/api";
+
 
 export default {
   name: "SignUp",
-  data () {
+  data() {
     return {
-      name: '',
-      email: '',
-      password: '',
+      name: "",
+      email: "",
+      password: "",
       isEmailError: false
-    }
+    };
   },
   methods: {
-    signup () {
-      let data = {name: this.name, email: this.email, password: this.password};
-      sendPOST('/api/signup', data)
-      .then(response => {
+    signup() {
+      let data = {
+        name: this.name,
+        email: this.email,
+        password: this.password
+      };
+      // our backend
+      sendPOST("/api/signup", data).then(response => {
         if (response.status == 400) {
           this.email = "Not available, choose again!";
           this.password = "";
           this.isEmailError = true;
-        } else { // success
+        } else {
+          // success
+          // UBeat API
+          api.createUser(this.name, this.email, this.password)
+          .then(response => {
+            api.createPlaylist("my playlist", data.email)
+          });
           this.name = "";
           this.email = "";
           this.password = "";
@@ -49,7 +59,7 @@ export default {
         }
       });
     },
-    clearError () {
+    clearError() {
       if (this.isEmailError) {
         this.email = "";
         this.isEmailError = false;
@@ -59,9 +69,10 @@ export default {
 };
 </script>
 
-
 <style scoped>
-input[type=text], input[type=email], input[type=password] {
+input[type="text"],
+input[type="email"],
+input[type="password"] {
   width: 100%;
   padding: 12px 20px;
   margin: 9px 0;

@@ -17,16 +17,11 @@
         </router-link>
       </li>
       <li class="nav-hovered">
-        <router-link class="hyperlink-decoration" to="/user">
-          Michelle
-        </router-link>
-      </li>
-      <li class="nav-hovered">
         <router-link to="/settings">
           <img src="../images/user-cog-solid.svg" alt="user settings" />
         </router-link>
       </li>
-      <li class="nav-hovered">
+      <li class="nav-hovered" v-on:click="logout">
         <router-link to="/">
           <img src="../images/sign-out-alt-solid.svg" alt="log out" />
         </router-link>
@@ -34,6 +29,20 @@
     </ul>
   </nav>
 </template>
+
+<script>
+import Cookies from "js-cookie";
+
+export default {
+  name: "Navigation",
+  methods: {
+    logout() {
+      Cookies.remove('token');
+      Cookies.remove('email');
+    }
+  }
+};
+</script>­
 
 <style>
 .menu-list {

@@ -28,6 +28,9 @@
 <script>
 import * as api from "../scripts/api";
 import Playlist from "./Playlist";
+import Cookies from "js-cookie";
+
+
 export default {
   name: "Playlists",
   components: {
@@ -36,13 +39,14 @@ export default {
 
   data: () => ({
     playlistInput: "",
-    userLists: []
+    userLists: [],
+    email: Cookies.get("email")
   }),
 
   methods: {
     async createPlaylist() {
       try {
-        const newPlaylist = await api.createPlaylist(this.playlistInput);
+        const newPlaylist = await api.createPlaylist(this.playlistInput, this.email);
         this.userLists.push(newPlaylist);
         this.playlistInput = "";
       } catch (err) {
@@ -63,7 +67,7 @@ export default {
     }
   },
   async created() {
-    this.userLists = await api.getPlaylists();
+    this.userLists = await api.getPlaylists(this.email);
   }
 };
 </script>

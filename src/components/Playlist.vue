@@ -34,6 +34,7 @@
 <script>
 import * as api from "../scripts/api";
 import Track from "./Track";
+import Cookies from "js-cookie";
 
 const trackLivrable2 = {
   artistId: 669771,
@@ -56,7 +57,8 @@ export default {
   data: () => ({
     newPlaylistName: "",
     displayTracks: false,
-    tracks: []
+    tracks: [],
+    email: Cookies.get("email")
   }),
 
   methods: {
@@ -64,7 +66,7 @@ export default {
       try {
         this.playlist.name = this.newPlaylistName;
         const { id, name, tracks } = this.playlist;
-        await api.renamePlaylist(name, tracks, id);
+        await api.renamePlaylist(name, tracks, id, this.email);
         this.newPlaylistName = "";
       } catch (err) {
         console.log(err);

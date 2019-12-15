@@ -1,13 +1,35 @@
 const BASE_URL = "https://ubeat.herokuapp.com/unsecure";
-const OWNER_MAIL = "christalgue@yopmail.com";
+const BASE_URL_SECURE = "https://ubeat.herokuapp.com";
 
-export const getPlaylists = () => {
+export const createUser = (name, email, password) => {
+  const encoded = {
+    name: encodeURIComponent(name),
+    email: encodeURIComponent(email),
+    password: encodeURIComponent(password)
+  };
+  const body = `name=${encoded.name}&email=${encoded.email}&password=${encoded.password}`;
+  return fetch(`${BASE_URL_SECURE}/signup`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: body
+  })
+    .then(response => {
+      return response;
+    })
+    .catch(err => {
+      console.log(err.message);
+    });
+};
+
+export const getPlaylists = email => {
   return fetch(`${BASE_URL}/playlists`)
     .then(response => response.json())
     .then(playlists => {
       let ownerPlaylists = [];
       for (let i = 0; i < playlists.length; i++) {
-        if (playlists[i]["owner"].email === OWNER_MAIL) {
+        if (playlists[i]["owner"].email === email) {
           ownerPlaylists.push(playlists[i]);
         }
       }
@@ -29,7 +51,7 @@ export const getPlaylist = id => {
     });
 };
 
-export const createPlaylist = playlistName => {
+export const createPlaylist = (playlistName, email) => {
   return fetch(`${BASE_URL}/playlists`, {
     method: "POST",
     headers: {
@@ -37,7 +59,7 @@ export const createPlaylist = playlistName => {
     },
     body: JSON.stringify({
       name: playlistName,
-      owner: OWNER_MAIL
+      owner: email
     })
   })
     .then(response => response.json())
@@ -49,7 +71,7 @@ export const createPlaylist = playlistName => {
     });
 };
 
-export const renamePlaylist = (newName, tracks, id) => {
+export const renamePlaylist = (newName, tracks, id, email) => {
   return fetch(`${BASE_URL}/playlists/${id}`, {
     method: "PUT",
     headers: {
@@ -57,7 +79,7 @@ export const renamePlaylist = (newName, tracks, id) => {
     },
     body: JSON.stringify({
       name: newName,
-      owner: OWNER_MAIL,
+      owner: email,
       tracks: tracks
     })
   })

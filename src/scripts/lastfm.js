@@ -22,3 +22,13 @@ export const extractSimilarArtistsNames = data => {
 
   return result;
 };
+
+export const extractTourStatus = data => {
+  let result = "No";
+
+  if (data.ontour != "0") {
+    result = "Yes";
+  }
+
+  return result;
+};
