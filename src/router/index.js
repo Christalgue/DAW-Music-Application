@@ -17,7 +17,6 @@ export default new Router({
       path: "/",
       name: "Home",
       component: Home
-      // TODO: add requiresAuth for home?
     },
     {
       path: "/login",
@@ -51,13 +50,13 @@ export default new Router({
     {
       path: "/user",
       name: "User",
-      component: UserPage
+      component: UserPage,
+      meta: { requiresAuth: true }
     },
     {
       path: "/result",
       name: "Result",
-      component: Results,
-      props: true
+      component: Results
     }
   ]
 });
