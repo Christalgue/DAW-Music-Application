@@ -65,7 +65,10 @@ export default {
   // monitor changes in search terms and adjust accordingly
   watch: {
     $route(to, from) {
-      this.search.results = []; // clear search results
+      this.search.resultsArtist = []; // clear search results
+      this.search.resultsAlbum = []; // clear search results
+      this.search.resultsTrack = []; // clear search results
+      this.search.resultsUser = []; // clear search results
       this.loadData();
     }
   },
