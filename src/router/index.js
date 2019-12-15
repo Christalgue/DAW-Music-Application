@@ -51,7 +51,8 @@ export default new Router({
     {
       path: "/user",
       name: "User",
-      component: UserPage
+      component: UserPage,
+      meta: { requiresAuth: true }
     },
     {
       path: "/result",

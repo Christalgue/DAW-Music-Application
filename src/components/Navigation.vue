@@ -49,6 +49,7 @@ export default {
     logout() {
       Cookies.remove('token');
       Cookies.remove('email');
+      localStorage.clear(); 
     }
   }
 };
