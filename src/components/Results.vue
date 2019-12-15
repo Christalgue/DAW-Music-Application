@@ -86,7 +86,7 @@ export default {
           this.search.results.push({
             name: result.artistName,
             id: result.artistId,
-            icon: "artist",
+            type: "artist",
             routerName: "Artist",
             routerParam: "artistId"
           });
@@ -94,7 +94,7 @@ export default {
           this.search.results.push({
             name: result.collectionName,
             id: result.collectionId,
-            icon: "album",
+            type: "album",
             routerName: "Album",
             routerParam: "albumId"
           });
@@ -102,7 +102,7 @@ export default {
           this.search.results.push({
             name: result.trackName,
             id: result.trackId,
-            icon: "track",
+            type: "track",
             routerName: "Track",
             track: result
           });
@@ -110,7 +110,7 @@ export default {
           this.search.results.push({
             name: result.name,
             id: result.userId,
-            icon: "user",
+            type: "user",
             routerName: "User",
             routerParam: "userId"
           });
