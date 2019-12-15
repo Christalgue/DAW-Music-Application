@@ -56,7 +56,8 @@ export default new Router({
     {
       path: "/result",
       name: "Result",
-      component: Results
+      component: Results,
+      props: true
     }
   ]
 });

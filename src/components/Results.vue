@@ -62,6 +62,13 @@ export default {
   comments: {
     "plus-button": PlusButton
   },
+  // monitor changes in search terms and adjust accordingly
+  watch: {
+    $route(to, from) {
+      this.search.results = []; // clear search results
+      this.loadData();
+    }
+  },
 
   methods: {
     async addTrackToPlaylist(track) {
@@ -74,12 +81,11 @@ export default {
 
     async loadData() {
       if (document.getElementById("search") !== null) {
-        this.search.terms = document.getElementById("search").value;
+        this.search.terms = this.$route.query.terms;
       } else {
         this.search.terms = "";
       }
       let search = await api.getGlobalSearch(this.search.terms);
-      console.log(search);
       this.search.resultCount = search.resultCount;
       this.formatData(search.results);
     },
@@ -136,6 +142,7 @@ export default {
 
   async created() {
     this.loadData();
-  }
+  },
+
 };
 </script>

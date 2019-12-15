@@ -51,7 +51,7 @@ export default {
         genre: "",
         url: "",
         id: 0,
-        summaryBio: "I am the bio!",
+        summaryBio: "",
         similarArtists: [],
         similarArtistsString: '',
         currentlyOnTour: 'No',
