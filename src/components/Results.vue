@@ -16,6 +16,7 @@
     <div> Albums: {{search.resultsAlbum.length}} results</div>
     <ul id="album-list">
       <li v-for="resultAlbum in search.resultsAlbum" :key="resultAlbum.id">
+        <img v-bind:src="resultAlbum.image" alt="No icon available" class="album-cover-result"/>
         <router-link
           class="hyperlink-decoration"
           :to="{ name: resultAlbum.routerName, params: { artistId: resultAlbum.id } }"
@@ -109,7 +110,8 @@ export default {
             id: result.collectionId,
             type: "album",
             routerName: "Album",
-            routerParam: "albumId"
+            routerParam: "albumId",
+            image: result.artworkUrl60
           });
         } else if (result.wrapperType === "track") {
           this.search.resultsTrack.push({
@@ -151,3 +153,11 @@ export default {
 
 };
 </script>
+
+<style>
+.album-cover-result {
+  max-width: 30px;
+  max-height: 30px;
+  margin-right: 15px;
+}
+</style>
