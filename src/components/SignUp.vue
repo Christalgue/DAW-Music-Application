@@ -3,13 +3,25 @@
     <form autocomplete="off" @submit.prevent="signup">
       <div class="signupbox">
         <label for="name"><b>Name</b></label>
-        <input v-model="name" type="text" />
+        <validation-provider rules="name-required" v-slot="{ errors }">
+          <input v-model="name" type="text" />
+          <span class="errorMessage">{{ errors[0] }}</span>
+        </validation-provider>
+        <br/>
 
         <label for="email"><b>Email</b></label>
-        <input v-model="email" type="email" v-bind:class="{ emailError: isEmailError }" @keydown="clearError" />
+        <validation-provider rules="email-required" v-slot="{ errors }">
+          <input v-model="email" type="email" v-bind:class="{ errorMessage: isEmailError }" @keydown="clearError" />
+          <span class="errorMessage">{{ errors[0] }}</span>
+        </validation-provider>
+        <br/>
 
         <label for="password"><b>Password</b></label>
-        <input v-model="password" type="password" />
+        <validation-provider rules="password-required" v-slot="{ errors }">
+          <input v-model="password" type="password" />
+          <span class="errorMessage">{{ errors[0] }}</span>
+        </validation-provider>
+        <br/>
         <button type="submit">Sign up</button>
       </div>
     </form>
@@ -17,12 +29,31 @@
 </template>
 
 <script>
+import { ValidationProvider, extend } from 'vee-validate';
+import { required } from 'vee-validate/dist/rules';
 import { sendPOST } from "../backend/helpers";
 import * as api from "../scripts/api";
 
+extend('name-required', {
+  ...required,
+  message: 'Name field is required'
+});
+
+extend('email-required', {
+  ...required,
+  message: 'Email field is required'
+});
+
+extend('password-required', {
+  ...required,
+  message: 'Password field is required'
+});
 
 export default {
   name: "SignUp",
+  components: {
+    ValidationProvider
+  },
   data() {
     return {
       name: "",
@@ -82,7 +113,7 @@ input[type="password"] {
   border-radius: 10px;
 }
 
-.emailError {
+.errorMessage {
   font-weight: bold;
   font-size: 0.7em;
   color: red;

@@ -16,6 +16,7 @@
     "express": "^4.17.1",
     "js-cookie": "^2.2.1",
     "uuidv4": "^6.0.0",
+    "vee-validate": "^3.2.0",
     "vue": "^2.6.10",
     "vue-router": "^3.1.2"
   },

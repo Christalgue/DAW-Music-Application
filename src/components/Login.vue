@@ -3,10 +3,18 @@
     <form autocomplete="off" @submit.prevent="login">
       <div class="loginbox">
         <label for="email"><b>Email</b></label>
-        <input v-model="email" type="email" v-bind:class="{ loginError: isLoginError }" @keydown="clearError" />
+        <validation-provider rules="email-required" v-slot="{ errors }">
+          <input v-model="email" type="email" v-bind:class="{ errorMessage: isLoginError }" @keydown="clearError" />
+          <span class="errorMessage">{{ errors[0] }}</span>
+        </validation-provider>
+        <br/>
 
         <label for="password"><b>Password</b></label>
-        <input v-model="password" type="password" />
+        <validation-provider rules="password-required" v-slot="{ errors }">
+          <input v-model="password" type="password" />
+          <span class="errorMessage">{{ errors[0] }}</span>
+        </validation-provider>
+        <br/>
         <button type="submit">Login</button>
       </div>
     </form>
@@ -14,11 +22,26 @@
 </template>
 
 <script>
+import { ValidationProvider, extend } from 'vee-validate';
+import { required } from 'vee-validate/dist/rules';
 import Cookies from "js-cookie";
 import { sendPOST } from "../backend/helpers";
 
+extend('email-required', {
+  ...required,
+  message: 'Email field is required'
+});
+
+extend('password-required', {
+  ...required,
+  message: 'Password field is required'
+});
+
 export default {
   name: "Login",
+  components: {
+    ValidationProvider
+  },
   data() {
     return {
       email: "",
@@ -71,7 +94,7 @@ input[type="password"] {
   border-radius: 10px;
 }
 
-.loginError {
+.errorMessage {
   font-weight: bold;
   font-size: 0.7em;
   color: red;
