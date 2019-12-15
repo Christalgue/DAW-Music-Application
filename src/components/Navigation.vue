@@ -3,8 +3,8 @@
     <ul class="menu-list">
       <li>
         <label for="search"></label>
-        <input id="search" name="q" type="text" placeholder="Mots clés" />
-        <router-link class="hyperlink-decoration" to="/result">
+        <input id="search" name="q" type="text" placeholder="Mots clés" v-model="searchText" />
+        <router-link :to="{ path: 'result', query: { terms: searchText }}">
           <button class="search-button">Search</button>
         </router-link>
       </li>
@@ -35,6 +35,11 @@ import Cookies from "js-cookie";
 
 export default {
   name: "Navigation",
+  data() {
+    return {
+      searchText: ""
+    };
+  },
   methods: {
     logout() {
       Cookies.remove('token');
