@@ -50,8 +50,8 @@
 
 <script>
 import * as api from "../scripts/api";
+import Cookies from "js-cookie";
 import PlusButton from "./PlusButton";
-const PLAYLIST_ID = "5dd835099aaacd0004ddeaed";
 
 export default {
   name: "Result",
@@ -73,7 +73,7 @@ export default {
   methods: {
     async addTrackToPlaylist(track) {
       try {
-        await api.addTrack(track, PLAYLIST_ID);
+        await api.addTrack(track, this.userLists[0].id);
       } catch (err) {
         console.log(err);
       }
@@ -130,6 +130,7 @@ export default {
   },
 
   data: () => ({
+    email: Cookies.get("email"),
     search: {
       terms: "",
       resultCount: "",
@@ -141,6 +142,7 @@ export default {
   }),
 
   async created() {
+    this.userLists = await api.getPlaylists(this.email);
     this.loadData();
   },
 

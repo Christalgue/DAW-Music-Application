@@ -51,8 +51,6 @@ import * as api from "../scripts/api";
 import Cookies from "js-cookie";
 import { millisecondsToTrackLength, getHumanReleaseDate } from "../scripts/helper";
 
-// id for abc playlist, hardcoded for now, must add choice of lists later
-const PLAYLIST_ID = "5df5bcf49738dd00041b14d6";  
 
 export default {
   components: {
