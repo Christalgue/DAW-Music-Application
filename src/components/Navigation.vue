@@ -38,6 +38,7 @@ export default {
   methods: {
     logout() {
       Cookies.remove('token');
+      Cookies.remove('email');
     }
   }
 };

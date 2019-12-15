@@ -38,8 +38,6 @@ export default {
         email: this.email,
         password: this.password
       };
-      // UBeat API
-      api.createUser(this.name, this.email, this.password);
       // our backend
       sendPOST("/api/signup", data).then(response => {
         if (response.status == 400) {
@@ -48,6 +46,11 @@ export default {
           this.isEmailError = true;
         } else {
           // success
+          // UBeat API
+          api.createUser(this.name, this.email, this.password)
+          .then(response => {
+            api.createPlaylist("my playlist", data.email)
+          });
           this.name = "";
           this.email = "";
           this.password = "";

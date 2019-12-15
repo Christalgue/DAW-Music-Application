@@ -16,7 +16,6 @@ export const createUser = (name, email, password) => {
     body: body
   })
     .then(response => {
-      console.log(response);
       return response;
     })
     .catch(err => {
