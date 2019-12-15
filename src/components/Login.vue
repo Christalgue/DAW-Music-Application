@@ -40,6 +40,9 @@ export default {
             Cookies.set("token", response.token, {
               expires: expirationInDays
             });
+            Cookies.set("email", this.email, {
+              expires: expirationInDays
+            });
             this.$router.go(-1); // now that user did log in, go where the user came from before the login
           });
         }

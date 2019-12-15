@@ -18,6 +18,8 @@
 
 <script>
 import { sendPOST } from "../backend/helpers";
+import * as api from "../scripts/api";
+
 
 export default {
   name: "SignUp",
@@ -36,6 +38,9 @@ export default {
         email: this.email,
         password: this.password
       };
+      // UBeat API
+      api.createUser(this.name, this.email, this.password);
+      // our backend
       sendPOST("/api/signup", data).then(response => {
         if (response.status == 400) {
           this.email = "Not available, choose again!";
