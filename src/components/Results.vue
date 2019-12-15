@@ -2,37 +2,45 @@
   <div>
     <h2>Result for: {{ search.terms }}</h2>
     <div>Number of results: {{ search.resultCount }}</div>
-    <ul>
-      <li v-for="result in search.results" :key="result.id">
+    <div> Artists: {{search.resultsArtist.length}} results</div>
+    <ul id="artist-list">
+      <li v-for="resultArtist in search.resultsArtist" :key="resultArtist.id">
         <router-link
-          v-if="result.routerName === 'Artist'"
           class="hyperlink-decoration"
-          :to="{ name: result.routerName, params: { artistId: result.id } }"
+          :to="{ name: resultArtist.routerName, params: { artistId: resultArtist.id } }"
         >
-          {{ result.name }}
+          {{ resultArtist.name }}
         </router-link>
+      </li>
+    </ul>
+    <div> Albums: {{search.resultsAlbum.length}} results</div>
+    <ul id="album-list">
+      <li v-for="resultAlbum in search.resultsAlbum" :key="resultAlbum.id">
         <router-link
-          v-if="result.routerName === 'Album'"
           class="hyperlink-decoration"
-          :to="{ name: result.routerName, params: { albumId: result.id } }"
+          :to="{ name: resultAlbum.routerName, params: { artistId: resultAlbum.id } }"
         >
-          {{ result.name }}
+          {{ resultAlbum.name }}
         </router-link>
-        <span v-if="result.routerName === 'Track'">
-          {{ result.name }}
-        </span>
-        <router-link
-          v-if="result.routerName === 'User'"
-          class="hyperlink-decoration"
-          :to="{ name: result.routerName, params: { userId: result.id } }"
-        >
-          {{ result.name }}
-        </router-link>
-        <button v-if="result.routerName === 'User'">Follow</button>
+      </li>
+    </ul>
+    <div> Track: {{search.resultsTrack.length}} results</div>
+    <ul id="track-list">
+      <li v-for="resultTrack in search.resultsTrack" :key="resultTrack.id">
+        <span> {{ resultTrack.name }}</span>
         <plus-button
-          v-if="result.routerName === 'Track'"
-          v-on:click.native="addTrackToPlaylist(result.track)"
+          v-on:click.native="addTrackToPlaylist(resultTrack.track)"
         />
+      </li>
+    </ul>
+    <div> User: {{search.resultsUser.length}} results</div>
+    <ul id="user-list">
+      <li v-for="resultUser in search.resultsUser" :key="resultUser.id">
+        <router-link
+          class="hyperlink-decoration"
+          :to="{ name: resultUser.routerName, params: { userId: resultUser.id } }"
+        />
+        <button>Follow</button>
       </li>
     </ul>
   </div>
@@ -85,7 +93,7 @@ export default {
     formatData(results) {
       results.forEach(result => {
         if (result.wrapperType === "artist") {
-          this.search.results.push({
+          this.search.resultsArtist.push({
             name: result.artistName,
             id: result.artistId,
             type: "artist",
@@ -93,7 +101,7 @@ export default {
             routerParam: "artistId"
           });
         } else if (result.wrapperType === "collection") {
-          this.search.results.push({
+          this.search.resultsAlbum.push({
             name: result.collectionName,
             id: result.collectionId,
             type: "album",
@@ -101,7 +109,7 @@ export default {
             routerParam: "albumId"
           });
         } else if (result.wrapperType === "track") {
-          this.search.results.push({
+          this.search.resultsTrack.push({
             name: result.trackName,
             id: result.trackId,
             type: "track",
@@ -109,7 +117,7 @@ export default {
             track: result
           });
         } else if (result.wrapperType !== "audiobook") {
-          this.search.results.push({
+          this.search.resultsUser.push({
             name: result.name,
             id: result.userId,
             type: "user",
@@ -125,10 +133,11 @@ export default {
     search: {
       terms: "",
       resultCount: "",
-      results: [],
-      searchText: ""
-    },
-    componentKey: 0
+      resultsArtist: [],
+      resultsAlbum: [],
+      resultsTrack: [],
+      resultsUser: []
+    }
   }),
 
   async created() {
