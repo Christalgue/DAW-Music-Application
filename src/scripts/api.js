@@ -181,6 +181,17 @@ export const getUser = id => {
     });
 };
 
+export const getAllUsers = () => {
+  return fetch(`${BASE_URL}/users`)
+    .then(response => response.json())
+    .then(response => {
+      return response;
+    })
+    .catch(err => {
+      console.log(err.message);
+    });
+};
+
 export const getGlobalSearch = terms => {
   return fetch(`${BASE_URL}/search?q=${terms.split(" ").join("+")}&limit=30`)
     .then(response => response.json())

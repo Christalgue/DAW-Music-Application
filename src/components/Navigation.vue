@@ -17,6 +17,11 @@
         </router-link>
       </li>
       <li class="nav-hovered">
+        <router-link to="/user">
+          My account
+        </router-link>
+      </li>
+      <li class="nav-hovered">
         <router-link to="/settings">
           <img src="../images/user-cog-solid.svg" alt="user settings" />
         </router-link>
