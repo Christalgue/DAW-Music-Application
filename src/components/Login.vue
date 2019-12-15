@@ -3,7 +3,7 @@
     <form autocomplete="off" @submit.prevent="login">
       <div class="loginbox">
         <label for="email"><b>Email</b></label>
-        <input v-model="email" type="email" v-bind:class="{ loginError: isLoginError }" @keydown="clearError" />>
+        <input v-model="email" type="email" v-bind:class="{ loginError: isLoginError }" @keydown="clearError" />
 
         <label for="password"><b>Password</b></label>
         <input v-model="password" type="password" />
