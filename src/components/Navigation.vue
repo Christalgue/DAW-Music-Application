@@ -4,7 +4,7 @@
       <li>
         <label for="search"></label>
         <input id="search" name="q" type="text" placeholder="Mots clés" v-model="searchText" />
-        <router-link :to="{ path: 'result', query: { terms: searchText }}">
+        <router-link :to="{ path: '/result', query: { terms: searchText }}">
           <button class="search-button">Search</button>
         </router-link>
       </li>
