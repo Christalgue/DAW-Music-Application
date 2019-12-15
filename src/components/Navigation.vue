@@ -4,9 +4,9 @@
       <li>
         <label for="search"></label>
         <input id="search" name="q" type="text" placeholder="Mots clés" />
-        <button>
-          <router-link class="hyperlink-decoration" to="/result">Search</router-link>
-        </button>
+        <router-link class="hyperlink-decoration" to="/result">
+          <button class="search-button">Search</button>
+        </router-link>
       </li>
       <li class="nav-hovered">
         <router-link class="hyperlink-decoration" to="/">Home</router-link>
@@ -79,5 +79,9 @@ export default {
 
 #search {
   width: 150px;
+}
+
+.search-button {
+  cursor: pointer;
 }
 </style>
