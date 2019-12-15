@@ -17,11 +17,6 @@
         </router-link>
       </li>
       <li class="nav-hovered">
-        <router-link class="hyperlink-decoration" to="/user">
-          Michelle
-        </router-link>
-      </li>
-      <li class="nav-hovered">
         <router-link to="/settings">
           <img src="../images/user-cog-solid.svg" alt="user settings" />
         </router-link>

@@ -48,10 +48,11 @@
 import ItunesIcon from "./ItunesIcon";
 import PlusButton from "./PlusButton";
 import * as api from "../scripts/api";
+import Cookies from "js-cookie";
 import { millisecondsToTrackLength, getHumanReleaseDate } from "../scripts/helper";
 
-// id for test_marco playlist, hardcoded for now, must add choice of lists later
-const PLAYLIST_ID = "5dd090292e266c000420391b";  
+// id for abc playlist, hardcoded for now, must add choice of lists later
+const PLAYLIST_ID = "5df5bcf49738dd00041b14d6";  
 
 export default {
   components: {
@@ -64,7 +65,7 @@ export default {
   methods: {
     async addTrackToPlaylist(track) {
       try {
-        await api.addTrack(track, PLAYLIST_ID);
+        await api.addTrack(track, this.userLists[0].id);
       } catch (err) {
         console.log(err);
       }
@@ -72,7 +73,7 @@ export default {
     async addAlbumTracksToPlaylist() {
       try {
         for (var track of this.album.tracks) {  // could we use map with async?
-          await api.addTrack(track, PLAYLIST_ID);
+          await api.addTrack(track, this.userLists[0].id);
         }
       } catch (err) {
         console.log(err);
@@ -92,11 +93,14 @@ export default {
         tracks: [],
         url: "",
         image: ""
-      }
+      },
+      email: Cookies.get("email"),
+      userLists: []
     };
   },
   async created() {
     this.albumId = this.$route.params.albumId;
+    this.userLists = await api.getPlaylists(this.email);
 
     try {
       let albumInfo = await api.getAlbum(this.albumId);
