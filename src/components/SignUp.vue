@@ -6,7 +6,7 @@
         <input v-model="name" type="text" />
 
         <label for="email"><b>Email</b></label>
-        <input v-model="email" type="email" v-bind:class="{ emailError: isEmailError }" @keydown="clearError" />>
+        <input v-model="email" type="email" v-bind:class="{ emailError: isEmailError }" @keydown="clearError" />
 
         <label for="password"><b>Password</b></label>
         <input v-model="password" type="password" />

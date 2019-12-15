@@ -2,15 +2,21 @@ const BASE_URL = "https://ubeat.herokuapp.com/unsecure";
 const BASE_URL_SECURE = "https://ubeat.herokuapp.com";
 
 export const createUser = (name, email, password) => {
+  const encoded = {
+    name: encodeURIComponent(name),
+    email: encodeURIComponent(email),
+    password: encodeURIComponent(password)
+  };
+  const body = `name=${encoded.name}&email=${encoded.email}&password=${encoded.password}`;
   return fetch(`${BASE_URL_SECURE}/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded"
     },
-    body: JSON.stringify({ name: name, email: email, password: password })
+    body: body
   })
-    .then(response => response.json())
     .then(response => {
+      console.log(response);
       return response;
     })
     .catch(err => {
