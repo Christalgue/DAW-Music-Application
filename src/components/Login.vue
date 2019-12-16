@@ -54,7 +54,6 @@ export default {
       api.login(this.email, this.password)
       .then(response => {
         if (response.status !== 200) {
-          console.log(response);
           this.email = "Wrong combination, try again!";
           this.password = "";
           this.isLoginError = true;
