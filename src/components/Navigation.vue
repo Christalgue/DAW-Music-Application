@@ -49,6 +49,8 @@ export default {
     logout() {
       Cookies.remove('token');
       Cookies.remove('email');
+      Cookies.remove('name');
+      Cookies.remove('id');
       localStorage.clear(); 
     }
   }

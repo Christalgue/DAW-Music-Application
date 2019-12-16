@@ -31,7 +31,6 @@
 <script>
 import { ValidationProvider, extend } from 'vee-validate';
 import { required } from 'vee-validate/dist/rules';
-import { sendPOST } from "../backend/helpers";
 import * as api from "../scripts/api";
 
 extend('name-required', {
@@ -69,26 +68,20 @@ export default {
         email: this.email,
         password: this.password
       };
-      // our backend
-      sendPOST("/api/signup", data).then(response => {
-        if (response.status == 400) {
-          this.email = "Not available, choose again!";
-          this.password = "";
-          this.isEmailError = true;
-        } else {
-          // success
-          // UBeat API
-          api.createUser(this.name, this.email, this.password)
-          .then(response => {
-            api.createPlaylist("my playlist", data.email)
-          });
-          this.name = "";
-          this.email = "";
-          this.password = "";
-          alert("Thank you for signing up, you may login now."); // TODO: time permitting, use a prettier message for user feedback
-          this.$emit("SignedUpShowLogin");
-        }
+      api.createUser(this.name, this.email, this.password)
+      .then(response => {
+        this.name = "";
+        this.email = "";
+        this.password = "";
+        alert("Thank you for signing up, you may login now."); // TODO: time permitting, use a prettier message for user feedback
+        this.$emit("SignedUpShowLogin");
+      })
+      .catch(err => {
+        this.email = "Not available, choose again!";
+        this.password = "";
+        this.isEmailError = true;
       });
+      
     },
     clearError() {
       if (this.isEmailError) {

@@ -25,7 +25,7 @@
 import { ValidationProvider, extend } from 'vee-validate';
 import { required } from 'vee-validate/dist/rules';
 import Cookies from "js-cookie";
-import { sendPOST } from "../backend/helpers";
+import * as api from "../scripts/api";
 
 extend('email-required', {
   ...required,
@@ -51,24 +51,26 @@ export default {
   },
   methods: {
     login() {
-      let data = { email: this.email, password: this.password };
-      sendPOST("/api/login", data).then(response => {
-        if (response.status == 400) {
+      api.login(this.email, this.password)
+      .then(response => {
+        if (response.status !== 200) {
+          console.log(response);
           this.email = "Wrong combination, try again!";
           this.password = "";
           this.isLoginError = true;
         } else {
+          // set cookies
           response.json().then(response => {
-            let expirationInDays = 1 / 2;
-            Cookies.set("token", response.token, {
-              expires: expirationInDays
-            });
-            Cookies.set("email", this.email, {
-              expires: expirationInDays
-            });
+            Cookies.set("token", response.token);
+            Cookies.set("name", response.name);
+            Cookies.set("id", response.id);
+            Cookies.set("email", response.email);
             this.$router.go(-1); // now that user did log in, go where the user came from before the login
           });
         }
+      })
+      .catch(err => {
+        
       });
     },
     clearError() {

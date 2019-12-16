@@ -1,5 +1,26 @@
-const BASE_URL = "https://ubeat.herokuapp.com/unsecure";
-const BASE_URL_SECURE = "https://ubeat.herokuapp.com";
+import Cookies from "js-cookie";
+const BASE_URL = "https://ubeat.herokuapp.com";
+
+export const login = (email, password) => {
+  const encoded = {
+    email: encodeURIComponent(email),
+    password: encodeURIComponent(password)
+  };
+  const body = `email=${encoded.email}&password=${encoded.password}`;
+  return fetch(`${BASE_URL}/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: body
+  })
+    .then(response => {
+      return response;
+    })
+    .catch(err => {
+      console.log(err.message);
+    });
+};
 
 export const createUser = (name, email, password) => {
   const encoded = {
@@ -8,7 +29,7 @@ export const createUser = (name, email, password) => {
     password: encodeURIComponent(password)
   };
   const body = `name=${encoded.name}&email=${encoded.email}&password=${encoded.password}`;
-  return fetch(`${BASE_URL_SECURE}/signup`, {
+  return fetch(`${BASE_URL}/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded"
@@ -24,7 +45,11 @@ export const createUser = (name, email, password) => {
 };
 
 export const getPlaylists = email => {
-  return fetch(`${BASE_URL}/playlists`)
+  return fetch(`${BASE_URL}/playlists`, {
+    headers: {
+      Authorization: Cookies.get("token")
+    }
+  })
     .then(response => response.json())
     .then(playlists => {
       let ownerPlaylists = [];
@@ -41,7 +66,11 @@ export const getPlaylists = email => {
 };
 
 export const getPlaylist = id => {
-  return fetch(`${BASE_URL}/playlists/${id}`)
+  return fetch(`${BASE_URL}/playlists/${id}`, {
+    headers: {
+      Authorization: Cookies.get("token")
+    }
+  })
     .then(response => response.json())
     .then(playlist => {
       return playlist;
@@ -55,7 +84,8 @@ export const createPlaylist = (playlistName, email) => {
   return fetch(`${BASE_URL}/playlists`, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      Authorization: Cookies.get("token")
     },
     body: JSON.stringify({
       name: playlistName,
@@ -75,7 +105,8 @@ export const renamePlaylist = (newName, tracks, id, email) => {
   return fetch(`${BASE_URL}/playlists/${id}`, {
     method: "PUT",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      Authorization: Cookies.get("token")
     },
     body: JSON.stringify({
       name: newName,
@@ -94,7 +125,10 @@ export const renamePlaylist = (newName, tracks, id, email) => {
 
 export const deletePlaylist = id => {
   return fetch(`${BASE_URL}/playlists/${id}`, {
-    method: "DELETE"
+    method: "DELETE",
+    headers: {
+      Authorization: Cookies.get("token")
+    }
   }).catch(err => {
     console.log(err.message);
   });
@@ -104,7 +138,8 @@ export const addTrack = (track, id) => {
   return fetch(`${BASE_URL}/playlists/${id}/tracks`, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      Authorization: Cookies.get("token")
     },
     body: JSON.stringify(track)
   })
@@ -119,14 +154,21 @@ export const addTrack = (track, id) => {
 
 export const deleteTrack = (trackId, playlistId) => {
   return fetch(`${BASE_URL}/playlists/${playlistId}/tracks/${trackId}`, {
-    method: "DELETE"
+    method: "DELETE",
+    headers: {
+      Authorization: Cookies.get("token")
+    }
   }).catch(err => {
     console.log(err.message);
   });
 };
 
 export const getArtist = id => {
-  return fetch(`${BASE_URL}/artists/${id}`)
+  return fetch(`${BASE_URL}/artists/${id}`, {
+    headers: {
+      Authorization: Cookies.get("token")
+    }
+  })
     .then(response => response.json())
     .then(response => {
       return response.results[0];
@@ -137,7 +179,11 @@ export const getArtist = id => {
 };
 
 export const getArtistAlbums = id => {
-  return fetch(`${BASE_URL}/artists/${id}/albums`)
+  return fetch(`${BASE_URL}/artists/${id}/albums`, {
+    headers: {
+      Authorization: Cookies.get("token")
+    }
+  })
     .then(response => response.json())
     .then(response => {
       return response.results;
@@ -148,7 +194,11 @@ export const getArtistAlbums = id => {
 };
 
 export const getAlbum = id => {
-  return fetch(`${BASE_URL}/albums/${id}`)
+  return fetch(`${BASE_URL}/albums/${id}`, {
+    headers: {
+      Authorization: Cookies.get("token")
+    }
+  })
     .then(response => response.json())
     .then(response => {
       return response.results[0];
@@ -160,7 +210,11 @@ export const getAlbum = id => {
 
 // TODO: if time allows for it, reduce the amount of data returned
 export const getAlbumTracks = id => {
-  return fetch(`${BASE_URL}/albums/${id}/tracks`)
+  return fetch(`${BASE_URL}/albums/${id}/tracks`, {
+    headers: {
+      Authorization: Cookies.get("token")
+    }
+  })
     .then(response => response.json())
     .then(response => {
       return response.results;
@@ -171,7 +225,11 @@ export const getAlbumTracks = id => {
 };
 
 export const getUser = id => {
-  return fetch(`${BASE_URL}/users/${id}`)
+  return fetch(`${BASE_URL}/users/${id}`, {
+    headers: {
+      Authorization: Cookies.get("token")
+    }
+  })
     .then(response => response.json())
     .then(response => {
       return response;
@@ -182,7 +240,11 @@ export const getUser = id => {
 };
 
 export const getAllUsers = () => {
-  return fetch(`${BASE_URL}/users`)
+  return fetch(`${BASE_URL}/users`, {
+    headers: {
+      Authorization: Cookies.get("token")
+    }
+  })
     .then(response => response.json())
     .then(response => {
       return response;
@@ -193,7 +255,11 @@ export const getAllUsers = () => {
 };
 
 export const getGlobalSearch = terms => {
-  return fetch(`${BASE_URL}/search?q=${terms.split(" ").join("+")}&limit=30`)
+  return fetch(`${BASE_URL}/search?q=${terms.split(" ").join("+")}&limit=30`, {
+    headers: {
+      Authorization: Cookies.get("token")
+    }
+  })
     .then(response => response.json())
     .then(response => {
       return response;
@@ -207,7 +273,8 @@ export const addFollowing = followedId => {
   return fetch(`${BASE_URL}/follow`, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      Authorization: Cookies.get("token")
     },
     body: JSON.stringify({
       id: followedId
@@ -221,5 +288,3 @@ export const addFollowing = followedId => {
       console.log(err.message);
     });
 };
-
-
