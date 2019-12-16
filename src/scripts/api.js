@@ -1,5 +1,6 @@
 import Cookies from "js-cookie";
 const BASE_URL = "https://ubeat.herokuapp.com";
+const BASE_URL_UNSECURED = "https://ubeat.herokuapp.com/unsecure";
 
 export const login = (email, password) => {
   const encoded = {
@@ -255,11 +256,7 @@ export const getAllUsers = () => {
 };
 
 export const getGlobalSearch = terms => {
-  return fetch(`${BASE_URL}/search?q=${terms.split(" ").join("+")}&limit=30`, {
-    headers: {
-      Authorization: Cookies.get("token")
-    }
-  })
+  return fetch(`${BASE_URL_UNSECURED}/search?q=${terms.split(" ").join("+")}&limit=30`)
     .then(response => response.json())
     .then(response => {
       return response;
