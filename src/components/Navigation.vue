@@ -21,11 +21,6 @@
           My account
         </router-link>
       </li>
-      <li class="nav-hovered">
-        <router-link to="/settings">
-          <img src="../images/user-cog-solid.svg" alt="user settings" />
-        </router-link>
-      </li>
       <li class="nav-hovered" v-on:click="logout">
         <router-link to="/">
           <img src="../images/sign-out-alt-solid.svg" alt="log out" />

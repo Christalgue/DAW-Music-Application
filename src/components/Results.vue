@@ -19,7 +19,7 @@
         <img v-bind:src="resultAlbum.image" alt="No icon available" class="album-cover-result"/>
         <router-link
           class="hyperlink-decoration"
-          :to="{ name: resultAlbum.routerName, params: { artistId: resultAlbum.id } }"
+          :to="{ name: resultAlbum.routerName, params: { albumId: resultAlbum.id } }"
         >
           {{ resultAlbum.name }}
         </router-link>
@@ -102,7 +102,7 @@ export default {
             id: result.artistId,
             type: "artist",
             routerName: "Artist",
-            routerParam: "artistId"
+            routerParam: result.artistId
           });
         } else if (result.wrapperType === "collection") {
           this.search.resultsAlbum.push({
@@ -110,7 +110,7 @@ export default {
             id: result.collectionId,
             type: "album",
             routerName: "Album",
-            routerParam: "albumId",
+            routerParam: result.collectionId,
             image: result.artworkUrl60
           });
         } else if (result.wrapperType === "track") {

@@ -2,6 +2,7 @@
   <div>
     <h1>{{ user.name }}</h1>
     <div>{{ user.email }}</div>
+    <br/>
     <div>My playlists:</div>
     <ul>
       <li v-for="playlist in user.playlists" v-bind:key="playlist.id">

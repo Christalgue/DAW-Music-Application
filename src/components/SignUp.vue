@@ -70,11 +70,18 @@ export default {
       };
       api.createUser(this.name, this.email, this.password)
       .then(response => {
-        this.name = "";
-        this.email = "";
-        this.password = "";
-        alert("Thank you for signing up, you may login now."); // TODO: time permitting, use a prettier message for user feedback
-        this.$emit("SignedUpShowLogin");
+        if (response.status == 200) {
+          this.name = "";
+          this.email = "";
+          this.password = "";
+          alert("Thank you for signing up, you may login now."); // TODO: time permitting, use a prettier message for user feedback
+          this.$emit("SignedUpShowLogin");
+        }
+        else {
+          this.email = "Not available, choose again!";
+          this.password = "";
+          this.isEmailError = true;
+        }
       })
       .catch(err => {
         this.email = "Not available, choose again!";
